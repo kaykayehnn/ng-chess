@@ -1,0 +1,89 @@
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000001;
+  background: rgba(0,0,0,0.5);
+  animation: fade-in 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.fade-out {
+  animation-name: fade-out;
+}
+
+.big-screen {
+  max-width: 800px;
+  /* TODO: top line may not be needed */
+  margin: 10vh auto;
+  background: white;
+  border: 2px solid black;
+  user-select: none;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.35);
+  animation: slide-in-top 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.slide-back {
+  animation-name: slide-out-top;
+}
+
+.screen {
+  flex: 0 0 50%;
+  background-image: linear-gradient(to bottom, #fdfbfb 0%, #ebedee 100%);
+}
+
+.screen:first-child {
+  border-right: 1px solid black;
+}
+
+.heading {
+  padding: 60px 40px 20px;
+  font-size: 1.25em;
+}
+
+.image {
+  width: 100%;
+  padding: 40px 40px 60px;
+  box-sizing: border-box;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-top {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

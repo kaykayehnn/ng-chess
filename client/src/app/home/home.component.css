@@ -1,0 +1,28 @@
+.home {
+  display: flex;
+  margin: 0 2.5%;
+}
+
+.welcome {
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 10px;
+}
+
+.chessboard {
+  flex: 0 0 50%;
+  max-width: 500px;
+  padding: 10px 0px;
+  margin-left: auto;
+}
+
+.button {
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 3px 5px;
+}
+
+.live-rooms {
+  cursor: pointer;
+  border: 1px solid black;
+}

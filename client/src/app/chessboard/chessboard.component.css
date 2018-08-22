@@ -1,0 +1,32 @@
+.chessboard {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  /* width: 400px; */
+  border: 2px solid black;
+  margin-right: 20px;
+  background: white;
+}
+
+.tile {
+  flex: 0 0 12.5%;
+  /* width: 50px; */
+  padding-bottom: 12.5%;
+}
+
+.black {
+  background: #888888;
+}
+
+.piece {
+  position: absolute;
+  top: 13%;
+  left: 13%;
+  width: 11.5%;
+  height: 11.5%;
+  transition: 1s all;
+}
+
+.piece:hover {
+  cursor: pointer;
+}

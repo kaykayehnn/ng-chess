@@ -1,0 +1,24 @@
+<div class="form">
+  <div class="message">
+    <span class="mode" [class.active]="signMode === SIGN_IN" (click)="toggleMode(SIGN_IN)">Sign In</span> or
+    <span class="mode" [class.active]="signMode === SIGN_UP" (click)="toggleMode(SIGN_UP)">Sign Up</span>
+  </div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email" placeholder="example@example.com">
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" [class.invalid]="userForm.errors?.differentPasswords" placeholder="••••••••">
+    </div>
+    <div class="input-group" [class.invisible]="signMode !== SIGN_UP">
+      <label for="repeatPassword">Repeat Password</label>
+      <input *ngIf="signMode === SIGN_UP" type="password" id="repeatPassword" [formControlName]="signMode !== SIGN_UP ? 'password' : 'repeatPassword'" [class.invalid]="userForm.errors?.differentPasswords" placeholder="••••••••">
+      <input *ngIf="signMode === SIGN_IN"> <!-- placeholder, takes up screen space so button wouldnt bounce around -->
+    </div>
+    <div>
+      <input class="button" [class.active]="userForm.valid" type="submit" [value]="signMode === SIGN_IN ? 'Sign In' : 'Sign Up'" [disabled]="!userForm.valid">
+    </div>
+  </form>
+</div>

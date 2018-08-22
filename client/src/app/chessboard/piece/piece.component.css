@@ -1,0 +1,19 @@
+.piece {
+  position: absolute;
+  transition: top 1s ease-out, left 1s ease-out;
+  /* with "all" zIndex is also transitioned so for the first half of the animation the
+  piece being moved may appear below nearby pieces which had been moved after its last turn */
+}
+
+.captured{
+  animation: scale-out-center 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+@keyframes scale-out-center {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}

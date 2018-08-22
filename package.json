@@ -1,0 +1,22 @@
+{
+  "name": "chess",
+  "version": "0.0.1",
+  "description": "Angular chess app",
+  "engines": {
+    "node": "8.11.3"
+  },
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm run client:build",
+    "start": "npm run server:start",
+    "postinstall": "cd server && npm install && cd ../client && npm install",
+    "server:start": "cd server && npm start",
+    "server:dev": "cd server && npm run dev",
+    "client:build": "cd client && npm run build",
+    "postclient:build": "rm -rf public && mkdir -p public && cp -r client/dist/* public",
+    "client:dev": "cd client && npm start"
+  },
+  "keywords": [],
+  "author": "KN",
+  "license": "MIT"
+}
