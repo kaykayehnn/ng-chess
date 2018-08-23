@@ -65,4 +65,4 @@ typings/
 public/
 
 # client build folder
-client/dist/
+client/dist
