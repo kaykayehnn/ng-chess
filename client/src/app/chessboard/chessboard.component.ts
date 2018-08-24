@@ -1,25 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as Chess from 'chess.js';
 
 import { AppState } from '../store/app.state';
 import { toPosition } from '../utilities/chess';
-import { rafInterval } from '../utilities/rafInterval';
 import { Piece } from '../contracts/Piece';
 import { Tile } from '../contracts/Tile';
 import { InitBoard, MovePiece, PromotePiece, CapturePiece, CastleKing } from '../store/actions/chess.actions';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-chessboard',
   templateUrl: './chessboard.component.html',
   styleUrls: ['./chessboard.component.css']
 })
-export class ChessboardComponent implements OnInit {
-  private chess: any
-  private moveIx: number
+export class ChessboardComponent implements OnInit, OnDestroy {
   public tiles: Tile[]
   public pieces: Piece[]
+  private chess: any
+  private randomMoves$: Subscription
+  private moveIx: number
 
+  @Input() isLanding: boolean
   constructor (private store: Store<AppState>) { }
 
   ngOnInit () {
@@ -31,7 +33,14 @@ export class ChessboardComponent implements OnInit {
         else this.pieces = this.pieces.map((p, i) => Object.assign(p, state.pieces[i]))
       })
 
-    rafInterval(() => this.randomMove(), 1500)
+    if (this.isLanding) {
+      this.randomMoves$ = interval(1500)
+        .subscribe(() => this.makeRandomMove())
+    }
+  }
+
+  ngOnDestroy () {
+    this.randomMoves$.unsubscribe()
   }
 
   startGame (fen?: string): void {
@@ -43,7 +52,7 @@ export class ChessboardComponent implements OnInit {
     this.store.dispatch(new InitBoard(this.pieces))
   }
 
-  randomMove (): void {
+  makeRandomMove (): void {
     let moves = this.chess.moves({ verbose: true })
     if (this.chess.in_checkmate() || this.chess.in_draw() || this.chess.in_stalemate()) {
       this.startGame()
@@ -55,6 +64,7 @@ export class ChessboardComponent implements OnInit {
     this.makeMove(randomMove)
   }
 
+  // from, to
   makeMove (obj): void {
     let move = this.chess.move(obj)
     this.store.dispatch(new MovePiece({ ...move, moveIx: this.moveIx++ }))
@@ -65,7 +75,7 @@ export class ChessboardComponent implements OnInit {
     if (move.flags.indexOf('c') >= 0) { // capture
       this.store.dispatch(new CapturePiece({ position: move.to, color: move.color }))
     }
-    else if (move.flags === 'k' || move.flags === 'q') { // kingside castling
+    else if (move.flags === 'k' || move.flags === 'q') { // castling
       this.store.dispatch(new CastleKing({ side: move.flags, color: move.color, zIndex: this.moveIx }))
     }
   }

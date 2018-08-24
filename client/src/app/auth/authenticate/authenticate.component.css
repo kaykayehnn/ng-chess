@@ -13,6 +13,10 @@
   animation-name: fade-out;
 }
 
+.flex {
+  display: flex;
+}
+
 .big-screen {
   max-width: 800px;
   /* TODO: top line may not be needed */

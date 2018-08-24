@@ -7,7 +7,7 @@ import { User } from '../models/User';
 export class StorageService {
   private readonly KEY = 'jwt'
 
-  public token: string
+  private token: string
   private storage = window.localStorage
 
   constructor () {
@@ -21,8 +21,13 @@ export class StorageService {
 
   save (token: string) {
     this.token = token
-
     this.storage.setItem(this.KEY, token)
+
+    return this.parseToken(token)
+  }
+
+  getToken (): string {
+    return this.token
   }
 
   private parseToken (token: string | null): User {

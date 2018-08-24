@@ -1,26 +1,30 @@
 const ws = require('ws')
 
-module.exports = (server) => {
-  const wss = new ws.Server({ server: server })
+const applyMiddleware = require('./middleware/')
+const applyControllers = require('./controllers/')
+
+module.exports = (config) => {
+  const wss = new ws.Server({ server: config.server })
+  delete config.server // it won't be used anymore
 
   wss.on('connection', socket => {
-    socket.send('hello')
+    console.log('websocket connection opened') // FIXME: remove
+    applyMiddleware(config, socket)
+    applyControllers(config, socket)
 
-    let id = setInterval(() => {
-      socket.send(Date.now())
-      console.log('sending date', Date.now())
-    }, 1000)
+    socket.on('message', (message) => {
+      try {
+        let messageObj = JSON.parse(message)
+        console.log('received message', messageObj.resource, messageObj.payload.event)
+        socket.emit(messageObj.resource, messageObj.payload)
+      } catch (e) {
+        console.log('failed parse', e)
+      }
+    })
 
     socket.on('close', () => {
-      console.log('websocket connection closed')
-      clearInterval(id)
+      console.log('websocket connection closed') // FIXME: remove
     })
-
-    socket.on('message', (data) => {
-      console.log(data)
-    })
-
-    console.log('websocket connection opened')
   })
 
   wss.on('listening', () => console.log('WebSocket listening...'))

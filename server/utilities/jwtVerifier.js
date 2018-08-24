@@ -14,10 +14,10 @@ module.exports = cache => {
 
   return verifier
 
-  function verify (req, action) {
+  function verify (reqOrToken, action) {
     return new Promise((resolve, reject) => {
       try {
-        let token = req.get('Authorization').split(' ')[1]
+        let token = getToken(reqOrToken)
         let payload = jwt.verify(token, JWT_SECRET)
 
         cache[action](token, (err, res) => {
@@ -29,8 +29,13 @@ module.exports = cache => {
           else reject(new Error(INVALID_TOKEN))
         })
       } catch (e) {
-        reject(INVALID_TOKEN)
+        reject(new Error(e))
       }
     })
+  }
+
+  function getToken (reqOrToken) {
+    if (typeof reqOrToken === 'string') return reqOrToken
+    return reqOrToken.get('Authorization').split(' ')[1]
   }
 }

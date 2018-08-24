@@ -2,8 +2,17 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+export function getWebsocketPath () {
+  let path = window.location.origin
+    .replace(/^http/, 'ws')
+    .replace('4200', '9000')
+
+  return path
+}
+
 export const environment = {
-  production: false
+  production: false,
+  getWebsocketPath
 }
 
 /*

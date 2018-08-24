@@ -10,9 +10,7 @@ export class AuthGuard implements CanActivate {
   constructor (
     private authService: AuthService,
     private router: Router
-  ) {
-
-  }
+  ) { }
 
 
   canActivate (
@@ -25,8 +23,8 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isAuthenticated()) {
       return true;
     }
-    // TODO: setup routes for signin signup
-    this.router.navigate(['/auth/signin']);
+
+    this.router.navigateByUrl('signin');
     return false;
   }
 }

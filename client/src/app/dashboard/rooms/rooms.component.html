@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="title-bar">
+   <div class="title">Rooms</div>
+   <div *ngIf="!createdRoom" class="create-btn" [class.shaking]="rooms.length === 0" (click)="createRoom()">Create room</div>
+  </div>
+  <div *ngIf="rooms.length === 0" class="linux-mascot">
+    <div inlineSVG="/assets/vectors/linux-brands.svg"></div>
+  </div>
+  <div *ngIf="rooms.length !== 0" class="flex">
+    <div class="filter">
+      <!-- FIXME: selected -->
+      <div class="type selected">All <span class="count">{{rooms.length}}</span></div>
+      <div class="type">Public</div>
+      <div class="type">Private</div>
+    </div>
+    <div class="list">
+      <div *ngFor="let room of rooms" class="container">
+        <div class="room">
+          <div>
+            <div class="avatar" [inlineSVG]="'/assets/vectors/animals/'+room.host.avatarUrl"></div>
+            <div class="host">{{room.host.email}}</div>
+          </div>
+          <div class="join-btn">
+            <div class="join-img" inlineSVG="/assets/vectors/sign-in-alt-solid.svg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

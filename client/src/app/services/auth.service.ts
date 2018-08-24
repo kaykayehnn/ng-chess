@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { HttpClient } from '@angular/common/http'
-import { Observable, Subject } from 'rxjs'
+import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators/'
 
 import { StorageService } from './storage.service'
@@ -13,6 +13,7 @@ import { SignIn, SignOut } from '../store/actions/user.actions';
   providedIn: 'root'
 })
 export class AuthService {
+  private readonly ADMIN_REGEX = /\badmin\b/
   private user: User
 
   constructor (
@@ -22,7 +23,7 @@ export class AuthService {
   ) {
     this.store.select('user')
       .subscribe(state => {
-        this.user = state.user
+        this.user = state
       })
 
     let user = this.storage.load()
@@ -56,9 +57,6 @@ export class AuthService {
     let url = `/api/users?email=${email}`
 
     return this.http.get<User[]>(url)
-      .pipe(
-        tap(res => console.log(res))
-      )
   }
 
   logout (): Observable<any> {
@@ -76,8 +74,16 @@ export class AuthService {
     return !!this.user
   }
 
+  isAdmin () {
+    return this.user && this.user.roles.match(this.ADMIN_REGEX)
+  }
+
   getUser (): User {
     return this.user
+  }
+
+  getToken (): string {
+    return this.storage.getToken()
   }
 
   private authenticate (url: string, body: object): Observable<User> {

@@ -29,7 +29,9 @@ exports.register = execQuery => function register (email, password) {
 exports.login = execQuery => function login (email, password) {
   return execQuery(QUERIES.LOGIN, [email])
     .then(rows => {
-      let user = rows[0] || {}
+      if (rows.length === 0) throw new Error('Invalid credentials')
+
+      let user = rows[0]
       if (generateHashedPassword(user.salt, password) !== user.hashedPassword) {
         throw new Error('Invalid credentials')
       }

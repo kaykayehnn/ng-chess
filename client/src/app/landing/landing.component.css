@@ -1,3 +1,7 @@
+.slide-out {
+  animation: slide-out-top 0.8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both 0.4s;
+}
+
 .home {
   display: flex;
   margin: 0 2.5%;
@@ -25,4 +29,15 @@
 .live-rooms {
   cursor: pointer;
   border: 1px solid black;
+}
+
+@keyframes slide-out-top {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
 }

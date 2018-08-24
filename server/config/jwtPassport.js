@@ -1,6 +1,5 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const uuid = require('uuid/v4')
 
 const jwtVerifierFactory = require('../utilities/jwtVerifier')
 const toPlainObject = require('../utilities/toPlainObject')
@@ -13,11 +12,6 @@ module.exports = (cache) => {
   express.request.login = function login () {
     return new Promise((resolve, reject) => {
       let payload = toPlainObject(this.user)
-
-      // add uuid to payload so that
-      // multiple logins wouldn't produce the same token
-      // and consequently when user logs out one token, all others will remain
-      payload.session = uuid()
 
       let token = jwt.sign(payload, JWT_SECRET)
       cache.set(token, '1', (err) => {

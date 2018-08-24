@@ -11,10 +11,11 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor (private storage: StorageService) { }
 
   intercept (request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.storage.token) {
+    let token = this.storage.getToken()
+    if (token) {
       request = request.clone({
         setHeaders: {
-          'Authorization': `Bearer ${this.storage.token}`
+          'Authorization': `Bearer ${token}`
         }
       })
     }
@@ -23,7 +24,6 @@ export class TokenInterceptor implements HttpInterceptor {
       if (event instanceof HttpResponse) {
         if (event.body.hasOwnProperty('token')) {
           let user = this.storage.save(event.body.token)
-
           event = event.clone({ body: user })
         }
       }

@@ -1,0 +1,43 @@
+.navigation {
+  display: flex;
+  flex-direction: column;
+  background: #212121;
+  height: 100%;
+  /* animation: slide-out 0.8s ease-out both; */
+  /* ENHANCEMENT: add show/hide button */
+  /* slides in from left starting width 0 */
+}
+
+@keyframes slide-out {
+  0%{
+    transform: translate(-100%);
+  }
+  100% {
+    transform: translate(0%);
+  }
+}
+
+.link {
+  /* display: block; */
+  width: 95px;
+  padding: 10px 0;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.active {
+  cursor: default;
+}
+
+.animated {
+  transition: 0.5s all;
+}
+
+.animated:hover, .active {
+  color: #212121;
+  background: #FFFFFF;
+}
+
+.icon {
+  padding: 5px 30px 5px;
+}

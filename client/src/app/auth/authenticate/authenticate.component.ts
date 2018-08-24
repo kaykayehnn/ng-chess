@@ -1,4 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core'
+import { Component, Output, EventEmitter, Input } from '@angular/core'
+import { Router } from '@angular/router';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-authenticate',
@@ -8,13 +10,12 @@ import { Component, Output, EventEmitter } from '@angular/core'
 export class AuthenticateComponent {
   public slideBackUp: boolean = false;
 
-  @Output() private hide = new EventEmitter<void>()
+  @Output() private hide = new EventEmitter<MouseEvent | boolean>()
 
   slideUp (event) {
     if (event !== true && !event.target.classList.contains('absolute')) return
 
     this.slideBackUp = true;
-    event.target
-    setTimeout(() => this.hide.emit(), 800)
+    this.hide.emit(event)
   }
 }

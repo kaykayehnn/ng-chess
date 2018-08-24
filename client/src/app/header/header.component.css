@@ -4,17 +4,19 @@
 }
 
 .logo {
-  cursor: pointer;
-  transition: 0.2s transform;
-  border-bottom: 2px solid transparent;
+  display: block;
+  color:#000000;
+  text-align: center;
+  /* transition: 0.2s transform; */
+  /* border-bottom: 2px solid transparent; */
 }
 
 .logo:hover {
-  border-bottom: 2px solid black;
+  /* border-bottom: 2px solid black; */
 }
 
 .logo:active {
-  transform: scale(1.025);
+  /* transform: scale(1.025); */
 }
 
 .logo-image {
@@ -28,14 +30,4 @@
   font-size: 50px;
   margin-left: 10px;
   user-select: none;
-}
-
-.menu {
-  margin-left: auto;
-  font-size: 1.5em;
-  align-self: flex-end;
-}
-
-.menu > * {
-  padding: 5px 5px 10px;
 }

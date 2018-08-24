@@ -4,19 +4,8 @@
 
 /* global styles */
 
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
-.body-container {
-  background-image: url('assets/pattern-2.png');
-  font-family: 'Roboto Slab', serif;
-  min-height: 100vh;
-}
-
-.transparent-container {
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.flex {
-  display: flex;
+a {
+  text-decoration: none;
 }
 
 /*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */

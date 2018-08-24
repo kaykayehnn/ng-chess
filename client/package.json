@@ -23,6 +23,8 @@
     "@ngrx/store": "6.1.0",
     "chess.js": "^0.10.2",
     "core-js": "^2.5.4",
+    "moment": "^2.22.2",
+    "ng-inline-svg": "^8.0.2",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.2",
     "zone.js": "^0.8.26"

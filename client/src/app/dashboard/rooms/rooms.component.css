@@ -1,0 +1,150 @@
+.container {
+  padding: 20px 40px;
+}
+
+.title-bar {
+  display: flex;
+}
+
+.title {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 60px;
+}
+
+.create-btn {
+  font-size: 1.5em;
+  cursor: pointer;
+  margin: 0 20px 0 auto;
+  padding: 0.5em;
+  background: #81D4FA;
+  color: #0D47A1;
+  border-radius: 5px;
+  user-select: none;
+  align-self: flex-start;
+  transition: 0.5s all;
+}
+
+.create-btn:hover {
+  background: #0D47A1;
+  color: #81D4FA;
+}
+
+.shaking:not(:hover) {
+  transform-origin: top center;
+  animation: swing 2.5s ease both 0s infinite;
+}
+
+/* ENHANCEMENT: align "empty" center, dont forget to reset font family */
+.linux-mascot {
+  text-align: center;
+  transform: translateX(7%);
+}
+
+.flex {
+  display: flex;
+}
+
+.filter {
+  flex: 0 0 20%;
+}
+
+/* ENHANCEMENT: could be improved */
+.type {
+  font-size: 1.25em;
+  padding: 10px 20px 10px;
+  border-left: 4px solid transparent;
+  user-select: none;
+  transition: border-color 0.3s;
+}
+
+.type:not(.selected) {
+  cursor: pointer;
+}
+
+:not(:hover) .type.selected, .type:hover {
+  border-color: #29B6F6;
+}
+
+.count {
+  float: right;
+}
+
+.list {
+  display: flex;
+  flex: 0 1 80%;
+  flex-wrap: wrap;
+  margin: 0 -5px;
+}
+
+.container {
+  min-width: 50%;
+  padding: 0 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.room {
+  display: flex;
+  border: 1px solid #212121;
+  border-radius: 5px;
+  background: #FFFFFF;
+  flex: 1;
+  align-self: flex-start;
+  transition: 0.5s all;
+}
+
+.room:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
+}
+
+.avatar {
+  width: 60px;
+  margin: 10px 20px;
+  border-radius: 50%;
+}
+
+.host {
+  font-size: 1.15em;
+  margin: 10px 20px; /* top margin collapses */
+}
+
+.join-btn {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.join-img {
+  cursor: pointer;
+  width: 40px;
+  margin-right: 15px;
+}
+
+@keyframes swing {
+  /* first ~1.5s act as a delay on *each* iteration */
+  62% {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+
+  70% {
+    transform: rotate3d(0, 0, 1, 3deg);
+  }
+
+  78% {
+    transform: rotate3d(0, 0, 1, -3deg);
+  }
+
+  86% {
+    transform: rotate3d(0, 0, 1, 3deg);
+  }
+
+  92% {
+    transform: rotate3d(0, 0, 1, -3deg);
+  }
+
+  100% {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}

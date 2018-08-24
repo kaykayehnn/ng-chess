@@ -28,7 +28,7 @@ export class FormComponent implements OnInit {
   public signMode: boolean = this.SIGN_IN
   private user = new UserRegistration()
 
-  @Output() private hide = new EventEmitter<void>()
+  @Output() private hide = new EventEmitter<boolean>()
   constructor (private authService: AuthService) { }
 
   ngOnInit (signMode?: boolean) {
@@ -54,7 +54,9 @@ export class FormComponent implements OnInit {
     let method = this.signMode === this.SIGN_UP ? 'signupUser' : 'signinUser'
 
     this.authService[method](email.value, password.value)
-      .subscribe(() => this.hide.emit())
+      .subscribe(() => {
+        this.hide.emit(true)
+      })
   }
 
   toggleMode (value: boolean) {

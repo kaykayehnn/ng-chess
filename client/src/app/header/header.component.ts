@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -6,27 +6,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-  dropdownLi: string = "nav-item dropdown";
-  dropdownMenu: string = "dropdown-menu";
-
+export class HeaderComponent {
   constructor (private authService: AuthService) { }
-
-  ngOnInit () {
-  }
-
-  expand () {
-    this.dropdownLi.endsWith('show')
-      ? this.dropdownLi = "nav-item dropdown"
-      : this.dropdownLi = "nav-item dropdown show";
-
-    this.dropdownMenu.endsWith('show')
-      ? this.dropdownMenu = "dropdown-menu"
-      : this.dropdownMenu = "dropdown-menu show";
-  }
-
-  onLogout () {
-    this.authService.logout();
-  }
 
 }

@@ -3,6 +3,6 @@ export class User {
     public email: string = '',
     public password: string = '',
     public avatarUrl: string,
-    public roles: string[]
+    public roles: string
   ) { }
 }
