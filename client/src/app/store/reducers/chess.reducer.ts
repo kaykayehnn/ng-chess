@@ -88,7 +88,7 @@ function castleKing (state: ChessState, action: CastleKing) {
   }
 }
 
-const initialState: ChessState = {
+export const initialState: ChessState = {
   pieces: [],
   captured: []
 }

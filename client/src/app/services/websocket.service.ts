@@ -1,11 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { Store } from "@ngrx/store";
 
 import { WebsocketMessage } from "../contracts/WebsocketMessage";
 import { environment } from "../../environments/environment";
-import { AppState } from "../store/app.state";
-import { User } from "../models/User";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -17,40 +15,42 @@ export class WebsocketService {
   private ws: WebSocket
   private messageQueue: string[]
   private connecting: boolean
-  private user: User
 
-  constructor (private store: Store<AppState>) {
+  constructor (
+    private authService: AuthService) {
     this.ws = new WebSocket(environment.getWebsocketPath())
     this.messages$ = new Subject<WebsocketMessage>()
     this.messageQueue = []
     this.connecting = true
 
-    this.store.select('user').subscribe(state => {
-      this.user = state
-    })
-
     this.ws.onopen = this.onConnected.bind(this)
+    this.ws.onclose = this.onClosed.bind(this)
     this.ws.onmessage = this.onMessage.bind(this)
   }
 
-  send (message: string | object) {
-    if (typeof message === 'object') message = JSON.stringify(message)
+  send (message: string | WebsocketMessage) {
+    if (typeof message === 'object') {
+      if (!message.payload.token) {
+        message.payload.token = this.authService.getToken()
+      }
+
+      message = JSON.stringify(message)
+    }
 
     if (this.connecting) {
       this.messageQueue.push(message)
       this.trySendQueue()
     } else {
-      console.log('sending', message) // FIXME: remove
       this.ws.send(message)
     }
   }
 
-  subscribe (resource: string) {
-    this.toggleSubscription(true, resource)
+  subscribe (resource: string, options?) {
+    this.toggleSubscription(true, resource, options)
   }
 
-  unsubscribe (resource: string) {
-    this.toggleSubscription(false, resource)
+  unsubscribe (resource: string, options?) {
+    this.toggleSubscription(false, resource, options)
   }
 
   private onConnected () {
@@ -58,14 +58,24 @@ export class WebsocketService {
     // send identity on connect
   }
 
+  private onClosed () {
+    if (!environment.production) {
+      setTimeout(() => window.location.reload(), 100)
+    }
+    console.log('websocket closed')
+  }
+
   private onMessage (message: MessageEvent) {
     this.messages$.next(JSON.parse(message.data))
   }
 
-  private toggleSubscription (status: boolean, resource: string) {
+  private toggleSubscription (status: boolean, resource: string, options?) {
     let message = {
       resource,
-      payload: { event: status ? 'subscribe' : 'unsubscribe' }
+      payload: {
+        event: status ? 'subscribe' : 'unsubscribe',
+        ...options
+      }
     }
 
     this.send(message)

@@ -25,6 +25,18 @@
   transition: 0.5s all;
 }
 
+@media screen and (max-width: 500px) {
+  .title-bar {
+    display: block;
+  }
+
+  .create-btn {
+    /* margin: 0; */
+    /* padding: 0; */
+    /* box-sizing: border-box; */
+  }
+}
+
 .create-btn:hover {
   background: #0D47A1;
   color: #81D4FA;
@@ -35,9 +47,11 @@
   animation: swing 2.5s ease both 0s infinite;
 }
 
-/* ENHANCEMENT: align "empty" center, dont forget to reset font family */
 .linux-mascot {
   text-align: center;
+  margin: 40px auto;
+  max-width: 400px;
+  /* max-width: 50px; */
   transform: translateX(7%);
 }
 
@@ -45,8 +59,15 @@
   display: flex;
 }
 
+@media screen and (max-width: 600px) {
+  .flex {
+    display: block;
+  }
+}
+
 .filter {
-  flex: 0 0 20%;
+  flex: 1 1 150px;
+  margin-bottom: 20px;
 }
 
 /* ENHANCEMENT: could be improved */
@@ -72,13 +93,13 @@
 
 .list {
   display: flex;
-  flex: 0 1 80%;
+  flex: 4 1 auto;
   flex-wrap: wrap;
   margin: 0 -5px;
 }
 
-.container {
-  min-width: 50%;
+.room-container {
+  min-width: 100%;
   padding: 0 5px;
   box-sizing: border-box;
   margin-bottom: 10px;

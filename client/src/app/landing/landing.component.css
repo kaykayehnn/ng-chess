@@ -7,10 +7,26 @@
   margin: 0 2.5%;
 }
 
+@media screen and (max-width: 500px) {
+  .home {
+    display: block;
+  }
+}
+
 .welcome {
   flex: 1 1 auto;
   text-align: center;
   padding: 10px;
+}
+
+.title {
+  font-size: 1.75em;
+  margin-bottom: 10px;
+}
+
+.title-sm {
+  font-size: 1.4em;
+  margin-bottom: 25px;
 }
 
 .chessboard {
@@ -21,9 +37,19 @@
 }
 
 .button {
-  cursor: pointer;
+  font-size: 1.25em;
+  padding: 6px 12px;
   border: 1px solid black;
-  padding: 3px 5px;
+  border-radius: 1px;
+  cursor: pointer;
+  background: #FFFFFF;
+  transition: 0.5s all;
+  transform-origin: top center;
+  animation: swing 2.5s ease both 0s infinite;
+}
+
+.button:hover {
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.35);
 }
 
 .live-rooms {
@@ -39,5 +65,32 @@
   100% {
     transform: translateY(-1000px);
     opacity: 0;
+  }
+}
+
+@keyframes swing {
+  /* first ~1.5s act as a delay on *each* iteration */
+  62% {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+
+  70% {
+    transform: rotate3d(0, 0, 1, 3deg);
+  }
+
+  78% {
+    transform: rotate3d(0, 0, 1, -3deg);
+  }
+
+  86% {
+    transform: rotate3d(0, 0, 1, 3deg);
+  }
+
+  92% {
+    transform: rotate3d(0, 0, 1, -3deg);
+  }
+
+  100% {
+    transform: rotate3d(0, 0, 1, 0deg);
   }
 }

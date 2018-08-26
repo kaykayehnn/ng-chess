@@ -1,0 +1,9 @@
+<div *ngIf="gameData">
+  <div class="title">{{gameData.whitePlayerEmail}} vs.
+    {{gameData.blackPlayerEmail}}</div>
+    <!-- ENHANCEMENT: add avatars -->
+  <div class="container">
+    <app-chessboard class="chessboard" stateSelector="game.board" [chessMoves]="gameService.chessMoves$"
+      [sendMove]="makeMoveBound" [fen]="gameData && gameData.fen" [color]="gameData && gameData.color"></app-chessboard>
+  </div>
+</div>

@@ -1,3 +1,61 @@
-<p>
-  admin works!
-</p>
+<p>Administration</p>
+<div class="flex">
+  <div [class.selected]="selected === 'users'" (click)="selected = 'users'">Users</div>
+  <div [class.selected]="selected === 'games'" (click)="selected = 'games'">Games</div>
+</div>
+
+<div *ngIf="state">
+
+  <div *ngIf="selected === 'users' && state.users">
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Email</th>
+          <th>AvatarUrl</th>
+          <th>Roles</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of state.users">
+          <td>{{user.id}}</td>
+          <td>{{user.email}}</td>
+          <td><input type="text" [value]="user.avatarUrl" (change)="user.avatarUrl = $event.target.value"></td>
+          <td><input type="text" (change)="user.roles = $event.target.value"
+              [value]="user.roles"></td>
+          <td>
+            <button (click)="saveUser(user)">Save</button>
+            <button (click)="deleteUser(user)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="selected === 'games' && state.games">
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>White Player</th>
+          <th>Black Player</th>
+          <th>Result</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of state.games">
+          <td>{{game.id}}</td>
+          <td>{{game.whitePlayerEmail}}</td>
+          <td>{{game.whitePlayerEmail}}</td>
+          <td>{{game.result || 'null'}}</td>
+          <td>
+            <button (click)="deleteGame(game)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

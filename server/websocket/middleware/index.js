@@ -1,9 +1,10 @@
 const heartbeat = require('./heartbeat')
+const attachSubscriber = require('./attachSubscriber')
 
-const middlewares = [heartbeat]
+const middlewares = [heartbeat, attachSubscriber]
 
 module.exports = function applyMiddleware (config, socket) {
   for (let i = 0; i < middlewares.length; i++) {
-    middlewares[i].call(socket, config)
+    middlewares[i](config).call(socket)
   }
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+
 // import {} from 'moment'
-import { RoomService } from '../../services/room.service';
+import { RoomService } from './room.service';
 import { AppState } from '../../store/app.state';
 import { Room } from '../../models/Room';
 import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-rooms',
@@ -15,7 +16,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class DashboardRoomsComponent implements OnInit, OnDestroy {
   public rooms: Room[]
+  public user: User
   public createdRoom: boolean
+  public renderCount = 0 // used not to show empty state for a very short time
+  // should wait until second render since first contains initial redux state
 
   constructor (
     private store: Store<AppState>,
@@ -26,21 +30,25 @@ export class DashboardRoomsComponent implements OnInit, OnDestroy {
     this.roomService.subscribe()
     this.store.select('rooms').subscribe(state => {
       this.rooms = state
+      this.renderCount++
       // ENHANCEMENT: add scale in/out animations
     })
+    this.user = this.authService.getUser()
   }
 
   ngOnDestroy () {
     this.roomService.unsubscribe()
+    if (this.createdRoom) {
+      this.roomService.removeRoom()
+    }
   }
 
   createRoom () {
-    let room: Room = {
-      host: this.authService.getUser(),
-      timestamp: Date.now()
-    }
-
     this.createdRoom = true
-    this.roomService.createRoom(room)
+    this.roomService.createRoom()
+  }
+
+  joinRoom (room: Room) {
+    this.roomService.joinRoom(room)
   }
 }

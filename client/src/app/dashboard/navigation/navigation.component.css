@@ -4,6 +4,7 @@
   background: #212121;
   height: 100%;
   /* animation: slide-out 0.8s ease-out both; */
+  /* ENHANCEMENT: make fixed */
   /* ENHANCEMENT: add show/hide button */
   /* slides in from left starting width 0 */
 }
@@ -18,7 +19,7 @@
 }
 
 .link {
-  /* display: block; */
+  /* position: fixed; */
   width: 95px;
   padding: 10px 0;
   text-align: center;

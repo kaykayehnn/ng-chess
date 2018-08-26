@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
+import { parseJwt } from '../utilities/parseJwt';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,6 @@ export class StorageService {
 
   private parseToken (token: string | null): User {
     // checks for null
-    return token && JSON.parse(window.atob(this.token.split('.')[1]))
+    return token && parseJwt<User>(token)
   }
 }

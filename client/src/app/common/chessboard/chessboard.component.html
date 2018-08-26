@@ -1,0 +1,22 @@
+<div *ngIf="!disableCaptions">
+  <div *ngIf="color !== '' && color !== undefined" class="message">You are playing {{COLOR_MAP[color].toLowerCase()}}</div>
+  <div class="message">{{message}}</div>
+</div>
+<div class="chessboard" [class.flipped]="color === 'b'"> <!-- ENHANCEMENT: flip when black -->
+  <div *ngFor="let tile of tiles"
+    class="tile"
+    (click)="click(tile)"
+    [class.black]="tile.color"
+    [style.background]="tile.highlight"
+    [class.highlight]="!!this.highlight">
+  </div>
+
+  <app-piece *ngFor="let piece of pieces"
+  (click)="click(piece)"
+  [isPicked]="piece === pickedPiece"
+  [type]="piece.type"
+  [color]="piece.color"
+  [position]="piece.position"
+  [captured]="piece.captured"
+  [zIndex]="piece.zIndex"></app-piece>
+</div>

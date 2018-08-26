@@ -1,11 +1,24 @@
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque hendrerit commodo blandit. Vivamus faucibus nisl in dolor congue commodo. Nullam in orci eu lectus molestie ullamcorper nec sit amet purus. Praesent ut ultrices arcu. Maecenas convallis elit vel vehicula vulputate. Maecenas facilisis in purus ac maximus. Aliquam mollis tincidunt justo, sed feugiat orci auctor a. Nulla rutrum risus a lacus tincidunt finibus. Fusce fermentum purus a nisl scelerisque laoreet. Sed eleifend tristique metus in laoreet. Suspendisse potenti.
-
-Pellentesque vitae convallis diam. Pellentesque nisi ante, vulputate euismod sodales sed, faucibus eget ligula. Curabitur viverra fringilla quam et tempor. Pellentesque rutrum libero ac pulvinar suscipit. Ut ut sem nec ex efficitur mattis. Phasellus ac dui fermentum, ultrices lectus dictum, consequat dui. Praesent interdum nibh eu nibh tincidunt ultricies nec non arcu. Sed ac libero porta, consectetur lorem non, malesuada neque. Maecenas pretium porttitor lorem nec scelerisque. Cras augue urna, sagittis at maximus at, vulputate eget massa. Etiam vulputate ante commodo eros aliquet, ac ultricies magna lacinia. Ut auctor ornare metus ac ornare. Aenean interdum porta ante ut finibus. Nam hendrerit mi lorem, in commodo odio lacinia ut. Donec dolor sem, dignissim sed varius ut, iaculis eu mauris.
-
-Fusce a magna ac neque dignissim fringilla accumsan eget eros. Quisque blandit orci vel risus tempus rutrum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed vel eros ac massa sodales aliquet sit amet euismod purus. Quisque eleifend metus mauris, id gravida enim accumsan non. Aliquam varius fringilla elit sit amet lacinia. Praesent sapien quam, tempor non sapien et, iaculis consequat sem. Praesent euismod, nulla a facilisis mollis, metus dolor rutrum purus, finibus rutrum massa tellus non enim.
-
-Aliquam accumsan quis nisi in blandit. Proin consequat tempor diam, id suscipit ipsum tempus ut. Vivamus egestas, quam eget facilisis porta, enim augue hendrerit lectus, id bibendum mi dolor a erat. Nullam elementum iaculis malesuada. Quisque id urna efficitur, rhoncus sapien eget, lacinia dolor. Duis molestie orci eu placerat mattis. Nam id orci rhoncus mi porttitor hendrerit. Fusce ullamcorper dui dui, sit amet congue orci ultricies sed. Donec vestibulum, elit non dictum sollicitudin, metus eros lacinia leo, ac porttitor velit diam a odio.
-
-Morbi ullamcorper nulla et orci ornare imperdiet. Aenean eu fringilla justo. Praesent eu ex est. Nunc vehicula, arcu sit amet lacinia suscipit, metus sapien posuere nisi, quis hendrerit ligula urna at turpis. Maecenas vitae rutrum quam. Nulla facilisi. Nullam accumsan tincidunt ultricies. Fusce placerat laoreet mauris, ac venenatis lorem molestie non. Ut mattis vestibulum purus id rhoncus. Sed dapibus turpis nec lorem fermentum, sit amet eleifend odio hendrerit. Curabitur eget urna mattis ipsum tincidunt lacinia eu a ex. Fusce cursus, libero id dignissim dignissim, nisl lacus molestie est, sed dapibus metus elit vitae ex. Vestibulum nec ante enim. Nullam in leo vel dolor feugiat porta. Integer mi arcu, cursus vel hendrerit sit amet, semper nec nulla.
-</p>
+<div *ngIf="state && state.stats">
+  <div class="title">Dashboard</div>
+  <div *ngIf="state.stats.winCount === 0 && state.stats.lossCount === 0 && state.stats.unfinishedCount === 0">
+    No data
+  </div>
+  <div *ngIf="state.stats.winCount > 0 || state.stats.lossCount > 0 || state.stats.unfinishedCount > 0" class="flex">
+    <div class="wl-chart chart">
+      <div>Win/Loss Ratio</div>
+      <canvas id="wl-chart">
+      </canvas>
+    </div>
+    <div class="played-chart chart">
+      <div>Finished/Unfinished Games Ratio</div>
+      <canvas id="played-chart">
+      </canvas>
+    </div>
+  </div>
+  <div *ngIf="state.lastMatches.length > 0">
+    <div class="heading">Last Matches</div>
+    <div *ngFor="let match of state.lastMatches">
+      {{match.whitePlayerEmail}} vs. {{match.blackPlayerEmail}}
+    </div>
+  </div>
+</div>

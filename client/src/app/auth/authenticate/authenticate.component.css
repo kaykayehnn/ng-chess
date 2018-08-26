@@ -1,10 +1,12 @@
 .absolute {
+  display: flex;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   z-index: 1000001;
+  box-sizing: border-box;
   background: rgba(0,0,0,0.5);
   animation: fade-in 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
@@ -13,19 +15,36 @@
   animation-name: fade-out;
 }
 
-.flex {
-  display: flex;
-}
-
 .big-screen {
-  max-width: 800px;
-  /* TODO: top line may not be needed */
-  margin: 10vh auto;
+  margin: 10% auto auto;
   background: white;
   border: 2px solid black;
+  flex: 0 1 800px;
   user-select: none;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.35);
   animation: slide-in-top 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@media screen and (max-width: 880px) {
+  .big-screen {
+    margin: 10vh 40px auto;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .big-screen {
+    margin: 10vh 20px auto;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .big-screen {
+    margin: 10vh 10px auto;
+  }
+}
+
+.flex {
+  display: flex;
 }
 
 .slide-back {
@@ -33,12 +52,18 @@
 }
 
 .screen {
-  flex: 0 0 50%;
+  flex: 1 0 0;
   background-image: linear-gradient(to bottom, #fdfbfb 0%, #ebedee 100%);
 }
 
-.screen:first-child {
+.bold-statements {
   border-right: 1px solid black;
+}
+
+@media screen and (max-width: 500px) {
+  .bold-statements {
+    display: none;
+  }
 }
 
 .heading {

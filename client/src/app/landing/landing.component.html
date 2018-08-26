@@ -2,16 +2,16 @@
   <app-header></app-header>
   <div class="home">
     <div class="welcome">
-      <div>Welcome Text</div>
-      <p>Short welcome paragraph</p>
-      <span class="button sign-in" (click)="showModal = true">Sign in button</span>
+      <div class="title">Join Gary and Vishi</div>
+      <div class="title-sm">Become the greatest Grandmaster ever</div>
+      <span class="button" (click)="showModal = true">Sign In</span>
       <h3></h3>
       <div *ngIf="showModal" class="modal">
         <app-authenticate (hide)="hideModal($event)"></app-authenticate>
       </div>
     </div>
     <div class="chessboard">
-      <app-chessboard [isLanding]="true"></app-chessboard>
+      <app-chessboard [chessMoves]="chessMoves$" color='' stateSelector="chessDemo" fen="" [disableCaptions]="true"></app-chessboard>
     </div>
   </div>
 </div>

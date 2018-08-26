@@ -75,7 +75,7 @@ export class AuthService {
   }
 
   isAdmin () {
-    return this.user && this.user.roles.match(this.ADMIN_REGEX)
+    return this.user && this.ADMIN_REGEX.test(this.user.roles)
   }
 
   getUser (): User {

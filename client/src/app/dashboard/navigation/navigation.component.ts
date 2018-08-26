@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AuthService } from '../../services/auth.service';
-import { Route } from '../../contracts/Route';
+import { NavigationRoute } from '../../contracts/NavigationRoute';
 
 @Component({
   selector: 'app-dashboard-navigation',
@@ -9,10 +9,10 @@ import { Route } from '../../contracts/Route';
   styleUrls: ['./navigation.component.css']
 })
 export class DashboardNavigationComponent {
-  public readonly routes: Route[] = [
+  public readonly routes: NavigationRoute[] = [
     {
       path: './',
-      title: 'home',
+      title: 'Home',
       iconUrl: '/assets/vectors/home-solid.svg'
     },
     {
@@ -20,6 +20,12 @@ export class DashboardNavigationComponent {
       title: 'Play',
       iconUrl: '/assets/vectors/gamepad-solid.svg'
     },
+    // {
+    //   path: './spectate',
+    //   title: 'Spectate',
+    //   iconUrl: '/assets/vectors/tv-solid.svg',
+    //   class: 'live'
+    // },
     {
       path: './admin',
       title: 'Admin',

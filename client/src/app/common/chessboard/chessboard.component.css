@@ -1,17 +1,30 @@
 .chessboard {
-  position: relative;
+  /* position: relative; */
   display: flex;
   flex-wrap: wrap;
-  /* width: 400px; */
   border: 2px solid black;
-  margin-right: 20px;
   background: white;
+  transform: translate(0,0);
+}
+
+.message {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.5em;
 }
 
 .tile {
-  flex: 0 0 12.5%;
-  /* width: 50px; */
   padding-bottom: 12.5%;
+  flex: 0 0 12.5%;
+}
+
+.highlighted.highlighted {
+  background: yellow;
+  cursor: pointer;
+}
+
+.possible-move {
+  cursor: pointer;
 }
 
 .black {

@@ -4,7 +4,7 @@
   </span>
   <a *ngFor="let route of routes" class="link animated" [routerLink]="route.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
     <ng-container *ngIf="authService.isAdmin() || !route.isAdmin">
-      <div class="icon" [inlineSVG]="route.iconUrl"></div>
+      <div [class]="'icon ' + (route.class || '')" [inlineSVG]="route.iconUrl"></div>
       <span>{{route.title}}</span>
     </ng-container>
   </a>

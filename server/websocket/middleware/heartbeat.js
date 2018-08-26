@@ -8,19 +8,21 @@ const { RedisClient } = require('redis')
  * @param {EventEmitter} config.eventEmitter Used to communicate between event handlers
  * @param {RedisClient} config.cache Used for data persistence
  */
-module.exports = function heartbeatMiddleware (config) {
-  let isAlive = true
+module.exports = function heartbeatMiddlewareFactory (config) {
+  return function heartbeatMiddleware () {
+    let isAlive = true
 
-  let id = setInterval(() => {
-    if (!isAlive) this.emit('close')
+    let id = setInterval(() => {
+      if (!isAlive) this.emit('close')
 
-    isAlive = false
-    this.ping(() => {
-      isAlive = true
+      isAlive = false
+      this.ping(() => {
+        isAlive = true
+      })
+    }, 15000)
+
+    this.on('close', () => {
+      clearInterval(id)
     })
-  }, 30000)
-
-  this.on('close', () => {
-    clearInterval(id)
-  })
+  }
 }

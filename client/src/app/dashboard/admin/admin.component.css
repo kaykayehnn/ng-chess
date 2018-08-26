@@ -1,0 +1,11 @@
+.flex {
+  display: flex;
+}
+
+.flex > :first-child {
+  margin-right: 20px;
+}
+
+.selected {
+  font-size: 1.5em;
+}

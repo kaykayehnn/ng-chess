@@ -1,0 +1,14 @@
+.title {
+  font-size: 2.5em;
+  padding: 20px 40px;
+}
+
+.flex {
+  display: flex;
+}
+
+.chart {
+  flex: 0 0 50%;
+  /* justify-content: center; */
+  text-align: center;
+}

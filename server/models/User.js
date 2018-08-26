@@ -16,7 +16,18 @@ const QUERIES = {
   GET_BY_EMAIL: `SELECT
   id
   FROM users_stats us
-  WHERE us.email = ?`
+  WHERE us.email = ?`,
+  GET_ALL: `SELECT
+  id,
+  email,
+  avatarUrl,
+  roles
+  FROM users_stats`,
+  EDIT_BY_ID: `UPDATE users u
+  SET u.roles = ?, u.avatarUrl = ?
+  WHERE u.id = ?`,
+  DELETE_BY_ID: `DELETE FROM USERS
+  WHERE id = ?`
 }
 
 exports.register = execQuery => function register (email, password) {
@@ -51,6 +62,18 @@ exports.getById = execQuery => function login (id) {
 
 exports.getByEmail = execQuery => function getByEmail (email) {
   return execQuery(QUERIES.GET_BY_EMAIL, [email])
+}
+
+exports.getAll = execQuery => function getAllUsers () {
+  return execQuery(QUERIES.GET_ALL)
+}
+
+exports.editById = execQuery => function editById (id, roles, avatarUrl) {
+  return execQuery(QUERIES.EDIT_BY_ID, [roles, avatarUrl, id])
+}
+
+exports.deleteById = execQuery => function deleteById (id) {
+  return execQuery(QUERIES.DELETE_BY_ID, [id])
 }
 
 function removeAuthProps (user) {

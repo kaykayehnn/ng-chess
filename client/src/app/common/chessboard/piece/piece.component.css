@@ -1,8 +1,13 @@
 .piece {
   position: absolute;
+  cursor: pointer;
   transition: top 1s ease-out, left 1s ease-out;
   /* with "all" zIndex is also transitioned so for the first half of the animation the
   piece being moved may appear below nearby pieces which had been moved after its last turn */
+}
+
+.picked {
+  transform: scale(1.25);
 }
 
 .captured{

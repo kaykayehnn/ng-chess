@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { toCoordinates } from '../../utilities/chess';
+
+import { toCoordinates } from '../../../utilities/chess';
+import { Piece } from '../../../contracts/Piece';
 
 @Component({
   selector: 'app-piece',
@@ -20,11 +22,12 @@ export class PieceComponent {
     b: 'black'
   };
 
-  @Input() public type: string;
-  @Input() public color: string;
-  @Input() public position: string;
-  @Input() public captured: boolean;
-  @Input() public zIndex: number;
+  @Input() type: string
+  @Input() color: string
+  @Input() position: string
+  @Input() captured: boolean
+  @Input() zIndex: number
+  @Input() isPicked: boolean
 
   toCoordinates (position) {
     return toCoordinates(position)

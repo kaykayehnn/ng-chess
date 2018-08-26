@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Game = require('../models/Game')
 
 const emailRgx = /^[^@]{2,}@(?:\w{2,}\.)+\w{2,}$/
 const passwordRgx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
@@ -51,6 +52,30 @@ exports.logout = (req, res, next) => {
     .catch(next)
 }
 
+exports.getStats = (req, res, next) => {
+  let userId = +req.params.userId
+  if (userId === req.user.id) {
+    Game.getStats(req.database)(userId)
+      .then(rows => {
+        if (rows.length === 0) return next(new Error(`User ${userId} does not exist`))
+
+        res.json(rows[0])
+      })
+  } else next(new Error('You are not allowed to do that'))
+}
+
+exports.getMatches = (req, res, next) => {
+  let userId = +req.params.userId
+  let n = +req.query.n || 5
+
+  if (userId === req.user.id) {
+    Game.getLast(req.database)(userId, n)
+      .then(rows => {
+        res.json(rows)
+      })
+  } else next(new Error('You are not allowed to do that'))
+}
+
 exports.getByEmail = (req, res, next) => {
   let { email } = req.query
   if (!emailRgx.test(email)) {
@@ -71,42 +96,26 @@ exports.getById = (req, res, next) => {
 }
 
 exports.getAllUsers = (req, res) => {
-  User.getAllUsers()
-    .lean()
-    .then(users => {
-      res.json(users)
-    })
+  User.getAll(req.database)()
+    .then(rows => res.json(rows))
 }
-
-const invalidateArr = (arr) => !Array.isArray(arr) || arr.some(a => typeof a !== 'string')
 
 exports.editUser = (req, res) => {
   let { userId } = req.params
-  let { roles, favouriteTeams, avatarIx } = req.body
+  let { roles, avatarUrl } = req.body
 
-  if (invalidateArr(roles) || invalidateArr(favouriteTeams)) {
-    return res.end()
-  }
-
-  User.findById(userId)
-    .then(user => {
-      if (!user) return res.end()
-
-      user.roles = roles
-      user.favouriteTeams = favouriteTeams
-      user.avatarIx = avatarIx
-
-      user.save()
-        .then(() => res.json(user))
+  User.editById(req.database)(+userId, roles, avatarUrl)
+    .then(rows => {
+      console.log(rows)
+      res.json({})
     })
 }
 
 exports.deleteUser = (req, res, next) => {
   let { userId } = req.params
 
-  User.findByIdAndRemove(userId)
-    .then(() => res.end())
-    .catch(() => next(new Error(`User ${userId} doesn't exist`)))
+  User.deleteById(req.database)(+userId)
+    .then(() => res.json({}))
 }
 
 function sendToken (res) {

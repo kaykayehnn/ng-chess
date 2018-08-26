@@ -1,4 +1,1 @@
-export enum PieceColor {
-  Black = 'b',
-  White = 'w'
-}
+export type PieceColor = 'b' | 'w'
