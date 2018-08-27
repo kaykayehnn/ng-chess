@@ -7,13 +7,12 @@
   },
   "main": "index.js",
   "scripts": {
-    "prestart": "npm run client:build",
     "start": "npm run server:start",
-    "postinstall": "cd server && npm install && cd ../client && npm install",
+    "install": "cd server && npm install && cd ../client && npm install",
+    "postinstall": "npm run client:build",
     "server:start": "cd server && npm start",
     "server:dev": "cd server && npm run dev",
     "client:build": "cd client && npm run build",
-    "postclient:build": "rm -rf public && mkdir -p public && cp -r client/dist/* public",
     "client:dev": "cd client && npm start"
   },
   "keywords": [],

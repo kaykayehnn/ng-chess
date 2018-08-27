@@ -13,7 +13,7 @@ module.exports = function gameController (config) {
   const { database, cache, jwtVerifier } = config
   const onMessageBound = onMessage.bind(this)
 
-  let subscribed = null
+  // let subscribed = null
   let playerToken = null
 
   this.sub.addListener('message', onMessageBound)
@@ -24,7 +24,7 @@ module.exports = function gameController (config) {
 
     const gameChannel = `${GAMES}:${gameId}`
     if (message.event === 'subscribe') {
-      subscribed = gameId
+      // subscribed = gameId
       this.sub.subscribe(gameChannel)
       cache.get(gameChannel, (_, val) => {
         let message = {
