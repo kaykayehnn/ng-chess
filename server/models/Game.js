@@ -24,19 +24,19 @@ const QUERIES = {
   GET_STATS: `SELECT
   ? as 'id',
   (SELECT COUNT(id)
-   FROM Games g
+   FROM games g
    WHERE (g.whitePlayerId = ?
           AND g.result = 'w')
      OR (g.blackPlayerId = ?
          AND g.result = 'b')) AS 'winCount',
   (SELECT COUNT(id)
-   FROM Games g
+   FROM games g
    WHERE (g.whitePlayerId = ?
           AND g.result = 'b')
      OR (g.blackPlayerId = ?
          AND g.result = 'w')) AS 'lossCount',
   (SELECT COUNT(id)
-   FROM Games g
+   FROM games g
    WHERE (g.whitePlayerId = ?
      OR g.blackPlayerId = ?)
      AND g.result IS NULL) AS 'unfinishedCount'`,
