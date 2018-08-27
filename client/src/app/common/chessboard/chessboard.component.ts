@@ -136,8 +136,8 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
       this.store.dispatch(new CastleKing({ side: move.flags, color: move.color, zIndex: this.moveIx }))
     }
 
-    if (this.chess.in_check()) this.message = `Check for ${movingSide}`
-    else if (this.chess.in_checkmate()) this.message = `Checkmate for ${movingSide}`
+    if (this.chess.in_checkmate()) this.message = `Checkmate for ${movingSide}`
+    else if (this.chess.in_check()) this.message = `Check for ${movingSide}`
 
     this.tiles = this.getTiles()
     this.sideToMove = this.chess.turn()
