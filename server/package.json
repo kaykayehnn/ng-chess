@@ -25,6 +25,7 @@
     "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "chess.js": "^0.10.2",
+    "compression": "^1.7.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "jsonwebtoken": "^8.3.0",
