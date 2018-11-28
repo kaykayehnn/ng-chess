@@ -188,7 +188,7 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
 
   private getTiles (positions: ChessMove[] = []): Tile[] {
     const MOVE_HIGHLIGHT = ['#5DADE2', '#2E86C1'];
-    const SPECIAL_MOVE = '#A569BD'; // castling or en passant
+    const SPECIAL_MOVE = '#A569BD';
     const CHECKED_KING = '#EC7063';
     const checkedKing = this.chess.in_check() || this.chess.in_checkmate();
     console.log(positions);
