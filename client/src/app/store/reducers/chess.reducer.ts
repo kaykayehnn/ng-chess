@@ -3,6 +3,7 @@ import {
   MOVE_PIECE, INIT_BOARD, CAPTURE_PIECE, PROMOTE_PIECE, CASTLE_KING,
   InitBoard, MovePiece, CapturePiece, PromotePiece, CastleKing
 } from '../actions/chess.actions';
+import { PieceType } from 'src/app/contracts/PieceType';
 
 function initBoard (state: ChessState, action: InitBoard) {
   return {
@@ -47,10 +48,11 @@ function promotePiece (state: ChessState, action: PromotePiece) {
   return {
     ...state,
     pieces: state.pieces.map(p => {
-      if (p.position === promotion.position) { p = {
-        ...p,
-        type: promotion.piece
-      };
+      if (p.position === promotion.position && p.type === PieceType.Pawn) {
+        p = {
+          ...p,
+          type: promotion.piece
+        };
       }
 
       return p;
@@ -69,16 +71,18 @@ function castleKing (state: ChessState, action: CastleKing) {
 
   const newPieces = state.pieces.map(p => {
     if (p.color === color) {
-      if (p.type === 'k') { p = {
-        ...p,
-        position: `${kingEndColumn}${row}`,
-        zIndex: castling.zIndex // king goes over to mimic convention of moving king first
-      };
+      if (p.type === 'k') {
+        p = {
+          ...p,
+          position: `${kingEndColumn}${row}`,
+          zIndex: castling.zIndex // king goes over to mimic convention of moving king first
+        };
       }
-      if (p.type === 'r' && p.position[0] === rookStartColumn) { p = {
-        ...p,
-        position: `${rookEndColumn}${row}`
-      };
+      if (p.type === 'r' && p.position[0] === rookStartColumn) {
+        p = {
+          ...p,
+          position: `${rookEndColumn}${row}`
+        };
       }
     }
 

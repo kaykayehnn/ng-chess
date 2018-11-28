@@ -4,5 +4,5 @@ export enum PieceType {
   Bishop = 'b',
   Queen = 'q',
   King = 'k',
-  Pawn = '' // convention from san
+  Pawn = 'p'
 }

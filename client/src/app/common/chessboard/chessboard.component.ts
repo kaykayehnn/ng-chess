@@ -3,13 +3,14 @@ import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as Chess from 'chess.js';
 
+import { InitBoard, MovePiece, PromotePiece, CapturePiece, CastleKing } from '../../store/actions/chess.actions';
+import { toPosition, toCoordinates } from '../../utilities/chess';
 import { AppState } from '../../store/app.state';
-import { toPosition } from '../../utilities/chess';
 import { Piece } from '../../contracts/Piece';
 import { Tile } from '../../contracts/Tile';
-import { InitBoard, MovePiece, PromotePiece, CapturePiece, CastleKing } from '../../store/actions/chess.actions';
 import { ChessMove } from '../../contracts/ChessMove';
 import { PieceColor } from '../../contracts/PieceColor';
+import { PieceType } from 'src/app/contracts/PieceType';
 
 @Component({
   selector: 'app-chessboard',
@@ -21,7 +22,7 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
     w: 'White',
     b: 'Black'
   };
-  private readonly positionRgx = /([a-h][1-8])/;
+  private readonly specialMoveRgx = /[qkcpe]/;
 
   public tiles: Tile[];
   public pieces: Piece[];
@@ -78,20 +79,24 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
 
     if (isPiece && this.sideToMove === this.color) {
       if (tileOrPiece.color === this.color) {
-        if (this.pickedPiece === tileOrPiece) {
+        if (this.pickedPiece === tileOrPiece) { // click same piece, unchooses it
           this.pickedPiece = null;
-        } else {
+        } else { // chooses another piece
           this.pickedPiece = tileOrPiece as Piece;
-          possibleMoves = this.chess.moves({ square: (this.pickedPiece).position });
+          possibleMoves = this.chess.moves({ square: (this.pickedPiece).position, verbose: true });
         }
 
         this.tiles = this.getTiles(possibleMoves);
-      } else if (this.pickedPiece != null) {
+      } else if (this.pickedPiece != null) { // capturing
         const otherPos = tileOrPiece.position;
-        const moveObj = { from: this.pickedPiece.position, to: otherPos };
+        const moveObj: any = { from: this.pickedPiece.position, to: otherPos };
+        if (this.pickedPiece.type === PieceType.Pawn) {
+          moveObj.promotion = 'q';
+        }
 
-        if (this.chess.move(moveObj)) {
+        if (this.chess.move(moveObj)) { // checks if move is valid
           this.chess.undo();
+
           this.makeMove(moveObj, true);
           this.pickedPiece = null;
           this.tiles = this.getTiles(possibleMoves);
@@ -131,12 +136,23 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
     const movingSide = this.COLOR_MAP[this.sideToMove];
     this.message = `${movingSide} moved from ${move.from} to ${move.to}`;
     if (move.flags.indexOf('p') >= 0) { // promote
-      this.message = `${movingSide} promotoed his pawn at ${move.to}`;
+      this.message = `${movingSide} promotoed their pawn at ${move.to}`;
       this.store.dispatch(new PromotePiece({ position: move.to, piece: move.promotion.toLowerCase() }));
     }
     if (move.flags.indexOf('c') >= 0) { // capture
       this.message = `${movingSide} captured at ${move.to}`;
       this.store.dispatch(new CapturePiece({ position: move.to, color: move.color }));
+    } else if (move.flags.indexOf('e') >= 0) { // en passant capture
+      let { row, column } = toCoordinates(move.to);
+      if (move.color === 'w') {
+        row++;
+      } else {
+        row--;
+      }
+
+      const capturedPosition = toPosition(row, column);
+      this.message = `${movingSide} captured en passant at ${move.to}`;
+      this.store.dispatch(new CapturePiece({ position: capturedPosition, color: move.color })); // FIXME:
     } else if (move.flags === 'k' || move.flags === 'q') { // castling
       this.message = `${movingSide} castled ${move.flags} side`;
       this.store.dispatch(new CastleKing({ side: move.flags, color: move.color, zIndex: this.moveIx }));
@@ -170,21 +186,26 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
     return pieces;
   }
 
-  private getTiles (positions: string[] = []): Tile[] {
+  private getTiles (positions: ChessMove[] = []): Tile[] {
     const MOVE_HIGHLIGHT = ['#5DADE2', '#2E86C1'];
+    const SPECIAL_MOVE = '#A569BD'; // castling or en passant
     const CHECKED_KING = '#EC7063';
     const checkedKing = this.chess.in_check() || this.chess.in_checkmate();
-
-    positions = positions.map(p => this.positionRgx.exec(p)[1]);
+    console.log(positions);
     const tiles: Tile[] = [];
 
     this.repeatForBoard((row, col) => {
       const position = toPosition(row, col);
       const piece = this.chess.get(position);
+      const move = positions.find(p => p.to === position);
 
-      let highlight;
-      if (positions.indexOf(position) >= 0) {
-        highlight = MOVE_HIGHLIGHT[(row + col) % 2];
+      let highlight: string;
+      if (move != null) {
+        if (move.flags.match(this.specialMoveRgx) !== null) { // castling, capturing, promotion and en passant
+          highlight = SPECIAL_MOVE;
+        } else {
+          highlight = MOVE_HIGHLIGHT[(row + col) % 2];
+        }
       } else if (checkedKing && piece && piece.type === 'k' && piece.color === this.chess.turn()) {
         highlight = CHECKED_KING;
       }
