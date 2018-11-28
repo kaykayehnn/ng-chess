@@ -17,7 +17,7 @@ import { PieceColor } from '../../contracts/PieceColor';
   styleUrls: ['./chessboard.component.css']
 })
 export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
-  public readonly COLOR_MAP: { w: string, b: string } = {
+  public readonly COLOR_MAP = {
     w: 'White',
     b: 'Black'
   };
@@ -44,16 +44,20 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit () {
     this.store.select(...this.stateSelector.split('.'))
       .subscribe(state => {
-        if (!this.pieces || this.pieces.length !== state.pieces.length) { this.pieces = state.pieces; } else { this.pieces = this.pieces.map((p, i) => Object.assign(p, state.pieces[i])); }
+        if (!this.pieces || this.pieces.length !== state.pieces.length) {
+          this.pieces = state.pieces;
+        } else {
+          this.pieces = this.pieces.map((p, i) => Object.assign(p, state.pieces[i]));
+        }
       });
 
     this.subscription = this.chessMoves.subscribe((move) => {
       const moveObj = this.chess.move(move);
       this.chess.undo();
 
-      this.makeMove(moveObj);
+      this.makeMove(moveObj, false);
     });
-    this.sendMove = this.sendMove || (() => 0);
+    this.sendMove = this.sendMove || (() => null);
   }
 
   ngOnChanges (changes: SimpleChanges) {
@@ -74,7 +78,9 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
 
     if (isPiece && this.sideToMove === this.color) {
       if (tileOrPiece.color === this.color) {
-        if (this.pickedPiece === tileOrPiece) { this.pickedPiece = null; } else {
+        if (this.pickedPiece === tileOrPiece) {
+          this.pickedPiece = null;
+        } else {
           this.pickedPiece = tileOrPiece as Piece;
           possibleMoves = this.chess.moves({ square: (this.pickedPiece).position });
         }
@@ -86,7 +92,7 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
 
         if (this.chess.move(moveObj)) {
           this.chess.undo();
-          this.makeMove(moveObj);
+          this.makeMove(moveObj, true);
           this.pickedPiece = null;
           this.tiles = this.getTiles(possibleMoves);
         }
@@ -96,7 +102,7 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
       const move = this.chess.moves({ square: this.pickedPiece.position, verbose: true })
         .find(m => m.to === position);
 
-      this.makeMove(move);
+      this.makeMove(move, true);
       this.pickedPiece = null;
       this.tiles = this.getTiles(possibleMoves);
     }
@@ -113,10 +119,13 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
     this.store.dispatch(new InitBoard(this.pieces));
   }
 
-  private makeMove (move): void {
+  private makeMove (move, ownMove: boolean): void {
     move = this.chess.move(move);
 
-    this.sendMove(move);
+    if (ownMove) {
+      this.sendMove(move);
+    }
+
     this.store.dispatch(new MovePiece({ ...move, moveIx: this.moveIx++ }));
 
     const movingSide = this.COLOR_MAP[this.sideToMove];
@@ -133,7 +142,11 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
       this.store.dispatch(new CastleKing({ side: move.flags, color: move.color, zIndex: this.moveIx }));
     }
 
-    if (this.chess.in_checkmate()) { this.message = `Checkmate for ${movingSide}`; } else if (this.chess.in_check()) { this.message = `Check for ${movingSide}`; }
+    if (this.chess.in_checkmate()) {
+      this.message = `Checkmate for ${movingSide}`;
+    } else if (this.chess.in_check()) {
+      this.message = `Check for ${movingSide}`;
+    }
 
     this.tiles = this.getTiles();
     this.sideToMove = this.chess.turn();
@@ -170,7 +183,11 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
       const piece = this.chess.get(position);
 
       let highlight;
-      if (positions.indexOf(position) >= 0) { highlight = MOVE_HIGHLIGHT[(row + col) % 2]; } else if (checkedKing && piece && piece.type === 'k' && piece.color === this.chess.turn()) { highlight = CHECKED_KING; }
+      if (positions.indexOf(position) >= 0) {
+        highlight = MOVE_HIGHLIGHT[(row + col) % 2];
+      } else if (checkedKing && piece && piece.type === 'k' && piece.color === this.chess.turn()) {
+        highlight = CHECKED_KING;
+      }
 
       tiles.push({
         position,
@@ -178,7 +195,7 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
         highlight
       });
     });
-    console.log(this.chess.turn());
+
     return tiles;
   }
 

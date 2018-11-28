@@ -2,10 +2,10 @@
   <span class="link">
     <div class="icon" inlineSVG="/assets/vectors/angular-solid.svg"></div>
   </span>
-  <a *ngFor="let route of routes" class="link animated" [routerLink]="route.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-    <ng-container *ngIf="authService.isAdmin() || !route.isAdmin">
+  <ng-container *ngFor="let route of routes">
+    <a *ngIf="authService.isAdmin() || !route.isAdmin"  class="link animated" [routerLink]="route.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <div [class]="'icon ' + (route.class || '')" [inlineSVG]="route.iconUrl"></div>
       <span>{{route.title}}</span>
-    </ng-container>
-  </a>
+    </a>
+  </ng-container>
 </div>
