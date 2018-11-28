@@ -1,7 +1,7 @@
-import { User } from "../../models/User";
-import { Game } from "../../models/Game";
+import { User } from '../../models/User';
+import { Game } from '../../models/Game';
 
 export interface AdminState {
-  readonly users: User[],
-  readonly games: Game[]
+  readonly users: User[];
+  readonly games: Game[];
 }

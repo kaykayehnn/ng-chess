@@ -32,6 +32,6 @@ export class DashboardNavigationComponent {
       iconUrl: '/assets/vectors/toolbox-solid.svg',
       isAdmin: true
     }
-  ]
+  ];
   constructor (public authService: AuthService) { }
 }

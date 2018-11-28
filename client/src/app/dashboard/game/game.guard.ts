@@ -20,7 +20,7 @@ export class GameGuard implements CanActivate {
   canActivate (
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    let gameId = next.paramMap.get('gameId')
+    const gameId = next.paramMap.get('gameId');
 
     return this.check(+gameId);
   }
@@ -32,28 +32,28 @@ export class GameGuard implements CanActivate {
    * If user is logged in and game has finished redirects to dashboard
    */
   check (gameId: number): Observable<boolean> {
-    let url = `/api/games/${gameId}`
+    const url = `/api/games/${gameId}`;
     return this.http.get(url)
       .pipe(catchError(err => of({})))
       .map((game: Game) => {
-        let user = this.authService.getUser()
-        let redirectUrl
+        const user = this.authService.getUser();
+        let redirectUrl;
         if (!user) {
-          redirectUrl = `/spectate/${gameId}`
+          redirectUrl = `/spectate/${gameId}`;
         } else if (user.id !== game.whitePlayerId && user.id !== game.blackPlayerId) {
           if (game.winner === null) {
-            redirectUrl = `/dashboard/spectate/${gameId}`
+            redirectUrl = `/dashboard/spectate/${gameId}`;
           } else {
-            redirectUrl = '/dashboard'
+            redirectUrl = '/dashboard';
           }
         }
 
         if (redirectUrl !== undefined) {
-          this.router.navigateByUrl(redirectUrl)
-          return false
+          this.router.navigateByUrl(redirectUrl);
+          return false;
         }
 
-        return true
-      })
+        return true;
+      });
   }
 }

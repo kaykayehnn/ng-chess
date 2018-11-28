@@ -1,6 +1,6 @@
-import { Piece } from "../../contracts/Piece";
+import { Piece } from '../../contracts/Piece';
 
 export interface ChessState {
-  readonly pieces: Piece[],
-  readonly captured: Piece[]
+  readonly pieces: Piece[];
+  readonly captured: Piece[];
 }

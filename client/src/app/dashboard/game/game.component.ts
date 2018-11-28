@@ -12,8 +12,8 @@ import { Game } from '../../models/Game';
   host: { '[style.flex]': '1' }
 })
 export class DashboardGameComponent implements OnInit {
-  public gameData: Game
-  public makeMoveBound: Function
+  public gameData: Game;
+  public makeMoveBound: Function;
 
   constructor (
     private store: Store<AppState>,
@@ -21,16 +21,16 @@ export class DashboardGameComponent implements OnInit {
     public gameService: GameService) { }
 
   ngOnInit () {
-    let gameId = +this.route.snapshot.paramMap.get('gameId')
-    this.gameService.startGame(gameId)
+    const gameId = +this.route.snapshot.paramMap.get('gameId');
+    this.gameService.startGame(gameId);
 
     this.store.select(state => state.game.data)
       .subscribe(state => {
-        this.gameData = state || {} as Game
+        this.gameData = state || {} as Game;
 
         if (!this.makeMoveBound && this.gameData) {
-          this.makeMoveBound = this.gameService.makeMove.bind(this.gameService, gameId)
+          this.makeMoveBound = this.gameService.makeMove.bind(this.gameService, gameId);
         }
-      })
+      });
   }
 }

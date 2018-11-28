@@ -1,3 +1,3 @@
-import { Room } from "../../models/Room";
+import { Room } from '../../models/Room';
 
-export type RoomState = Room[]
+export type RoomState = Room[];

@@ -11,31 +11,31 @@ import { Game } from '../../models/Game';
   styleUrls: ['./admin.component.css']
 })
 export class DashboardAdminComponent implements OnInit {
-  public state: AdminState
-  public selected: string = 'users'
+  public state: AdminState;
+  public selected = 'users';
 
   constructor (
     private store: Store<AppState>,
     private adminService: AdminService) { }
 
   ngOnInit () {
-    this.adminService.fetchUsers()
-    this.adminService.fetchGames()
+    this.adminService.fetchUsers();
+    this.adminService.fetchGames();
 
     this.store.select('admin').subscribe(state => {
-      this.state = state
-    })
+      this.state = state;
+    });
   }
 
   saveUser (user: User) {
-    this.adminService.editUser(user.id, user)
+    this.adminService.editUser(user.id, user);
   }
 
   deleteUser (user: User) {
-    this.adminService.deleteUser(user.id)
+    this.adminService.deleteUser(user.id);
   }
 
   deleteGame (game: Game) {
-    this.adminService.deleteGame(game.id)
+    this.adminService.deleteGame(game.id);
   }
 }

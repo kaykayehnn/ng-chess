@@ -3,17 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export function getWebsocketPath () {
-  let path = window.location.origin
+  const path = window.location.origin
     .replace(/^http/, 'ws')
-    .replace('4200', '9000')
+    .replace('4200', '9000');
 
-  return path
+  return path;
 }
 
 export const environment = {
   production: false,
   getWebsocketPath
-}
+};
 
 /*
  * In development mode, to ignore zone related error stack frames such as

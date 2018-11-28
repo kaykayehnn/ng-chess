@@ -1,7 +1,7 @@
 
 /**
  * Returns a chess position from chessboard row/col
- * @example 
+ * @example
  * toPosition(0,0) => 'a1'
  * @example
  * toPosition(0,7) => 'a8'
@@ -11,10 +11,10 @@
  * @param col 0 based column/file
  */
 export function toPosition (row: number, col: number): string {
-  let file = String.fromCharCode('a'.charCodeAt(0) + col)
-  let position = `${file}${8 - (row)}`
+  const file = String.fromCharCode('a'.charCodeAt(0) + col);
+  const position = `${file}${8 - (row)}`;
 
-  return position
+  return position;
 }
 
 /**
@@ -28,8 +28,8 @@ export function toPosition (row: number, col: number): string {
  * @param position Chess position of a square
  */
 export function toCoordinates (position: string): { row: number, column: number } {
-  let row = 8 - +position.charAt(1)
-  let column = position.charCodeAt(0) - 'a'.charCodeAt(0)
+  const row = 8 - +position.charAt(1);
+  const column = position.charCodeAt(0) - 'a'.charCodeAt(0);
 
-  return { row, column }
+  return { row, column };
 }

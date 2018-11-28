@@ -1,18 +1,18 @@
-import { RoomState } from "../state/room.state";
-import { FetchedRooms, FETCHED_ROOMS } from "../actions/room.actions";
+import { RoomState } from '../state/room.state';
+import { FetchedRooms, FETCHED_ROOMS } from '../actions/room.actions';
 
 function fetchedRooms (state: RoomState, action: FetchedRooms) {
-  let rooms = action.payload
-  return [...rooms]
+  const rooms = action.payload;
+  return [...rooms];
 }
 
-const initialState: RoomState = []
+const initialState: RoomState = [];
 
 export function roomReducer (state: RoomState = initialState, action): RoomState {
   switch (action.type) {
     case FETCHED_ROOMS:
-      return fetchedRooms(state, action)
+      return fetchedRooms(state, action);
     default:
-      return state
+      return state;
   }
 }

@@ -1,3 +1,3 @@
-import { User } from "../../models/User";
+import { User } from '../../models/User';
 
-export type UserState = User
+export type UserState = User;

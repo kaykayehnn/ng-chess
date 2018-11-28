@@ -1,19 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser'
-import { NgModule } from '@angular/core'
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { ReactiveFormsModule } from '@angular/forms'
-import { StoreModule } from '@ngrx/store'
-import { InlineSVGModule } from 'ng-inline-svg'
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 // ENHANCEMENT: organize imports
-import { AppRoutingModule } from './app-routing.module'
-import { AppComponent } from './app.component'
-import { HeaderComponent } from './header/header.component'
-import { LandingComponent } from './landing/landing.component'
-import { ChessboardComponent } from './common/chessboard/chessboard.component'
-import { PieceComponent } from './common/chessboard/piece/piece.component'
-import { AuthenticateComponent } from './auth/authenticate/authenticate.component'
-import { rootReducer } from './store/app.reducers'
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { LandingComponent } from './landing/landing.component';
+import { ChessboardComponent } from './common/chessboard/chessboard.component';
+import { PieceComponent } from './common/chessboard/piece/piece.component';
+import { AuthenticateComponent } from './auth/authenticate/authenticate.component';
+import { rootReducer } from './store/app.reducers';
 import { metaReducers } from './store/app.metaReducers';
 import { FormComponent } from './auth/form/form.component';
 import { TokenInterceptor } from './auth/token.interceptor';

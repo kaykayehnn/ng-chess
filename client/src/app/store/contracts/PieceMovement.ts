@@ -1,5 +1,5 @@
 export interface PieceMovement {
-  from: string,
-  to: string,
-  moveIx: number
+  from: string;
+  to: string;
+  moveIx: number;
 }

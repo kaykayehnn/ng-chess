@@ -1,11 +1,11 @@
 export function getWebsocketPath () {
-  let path = window.location.origin
-    .replace(/^http/, 'ws')
+  const path = window.location.origin
+    .replace(/^http/, 'ws');
 
-  return path
+  return path;
 }
 
 export const environment = {
   production: true,
   getWebsocketPath
-}
+};

@@ -1,6 +1,6 @@
-import { PieceType } from "../../contracts/PieceType";
+import { PieceType } from '../../contracts/PieceType';
 
 export interface PiecePromotion {
-  position: string,
-  piece: PieceType
+  position: string;
+  piece: PieceType;
 }

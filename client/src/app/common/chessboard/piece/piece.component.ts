@@ -22,14 +22,14 @@ export class PieceComponent {
     b: 'black'
   };
 
-  @Input() type: string
-  @Input() color: string
-  @Input() position: string
-  @Input() captured: boolean
-  @Input() zIndex: number
-  @Input() isPicked: boolean
+  @Input() type: string;
+  @Input() color: string;
+  @Input() position: string;
+  @Input() captured: boolean;
+  @Input() zIndex: number;
+  @Input() isPicked: boolean;
 
   toCoordinates (position) {
-    return toCoordinates(position)
+    return toCoordinates(position);
   }
 }

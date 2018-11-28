@@ -15,10 +15,10 @@ import { User } from '../../models/User';
   host: { '[style.flex]': '1' }
 })
 export class DashboardRoomsComponent implements OnInit, OnDestroy {
-  public rooms: Room[]
-  public user: User
-  public createdRoom: boolean
-  public renderCount = 0 // used not to show empty state for a very short time
+  public rooms: Room[];
+  public user: User;
+  public createdRoom: boolean;
+  public renderCount = 0; // used not to show empty state for a very short time
   // should wait until second render since first contains initial redux state
 
   constructor (
@@ -27,28 +27,28 @@ export class DashboardRoomsComponent implements OnInit, OnDestroy {
     private authService: AuthService) { }
 
   ngOnInit () {
-    this.roomService.subscribe()
+    this.roomService.subscribe();
     this.store.select('rooms').subscribe(state => {
-      this.rooms = state
-      this.renderCount++
+      this.rooms = state;
+      this.renderCount++;
       // ENHANCEMENT: add scale in/out animations
-    })
-    this.user = this.authService.getUser()
+    });
+    this.user = this.authService.getUser();
   }
 
   ngOnDestroy () {
-    this.roomService.unsubscribe()
+    this.roomService.unsubscribe();
     if (this.createdRoom) {
-      this.roomService.removeRoom()
+      this.roomService.removeRoom();
     }
   }
 
   createRoom () {
-    this.createdRoom = true
-    this.roomService.createRoom()
+    this.createdRoom = true;
+    this.roomService.createRoom();
   }
 
   joinRoom (room: Room) {
-    this.roomService.joinRoom(room)
+    this.roomService.joinRoom(room);
   }
 }

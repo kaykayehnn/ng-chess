@@ -1,4 +1,4 @@
 export interface WebsocketMessage {
-  resource: string,
-  payload: any
+  resource: string;
+  payload: any;
 }

@@ -1,1 +1,1 @@
-export type PieceColor = 'b' | 'w'
+export type PieceColor = 'b' | 'w';

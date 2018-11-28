@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core'
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/User';
 
@@ -8,14 +8,14 @@ import { User } from '../../models/User';
   styleUrls: ['./authenticate.component.css']
 })
 export class AuthenticateComponent {
-  public slideBackUp: boolean = false;
+  public slideBackUp = false;
 
-  @Output() private hide = new EventEmitter<MouseEvent | boolean>()
+  @Output() private hide = new EventEmitter<MouseEvent | boolean>();
 
   slideUp (event) {
-    if (event !== true && !event.target.classList.contains('absolute')) return
+    if (event !== true && !event.target.classList.contains('absolute')) { return; }
 
     this.slideBackUp = true;
-    this.hide.emit(event)
+    this.hide.emit(event);
   }
 }
