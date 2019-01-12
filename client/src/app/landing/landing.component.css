@@ -20,13 +20,23 @@
 }
 
 .title {
-  margin: 10% 0 5%;
+  margin: 40px 0 20px;
   font-size: 1.9em;
 }
 
 .title-sm {
-  margin-bottom: 20%;
+  margin-bottom: 15%;
   font-size: 1.5em;
+}
+
+@media screen and (max-width: 550px) {
+  .title {
+    margin: 20px 0 10px;
+  }
+
+  .title-sm {
+    margin-bottom: 10%;
+  }
 }
 
 .button {
@@ -70,6 +80,7 @@
 .review-block {
   display: block;
   margin: auto;
+  text-align: center;
 }
 
 .review-text {
@@ -79,6 +90,17 @@
 .review-author {
   font-size: 1.3em;
   margin: 20px 0px 0px 25px;
+}
+
+@media screen and (max-width: 660px) {
+  .review {
+    display: block;
+  }
+  
+  .review-image {
+    display: block;
+    margin: 0 auto 30px;
+  }
 }
 
 @keyframes slide-out-top {
