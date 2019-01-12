@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   background: #212121;
-  height: 100%;
+  height: 100vh;
   /* animation: slide-out 0.8s ease-out both; */
   /* ENHANCEMENT: make fixed */
   /* ENHANCEMENT: add show/hide button */

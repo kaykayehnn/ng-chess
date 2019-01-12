@@ -8,3 +8,13 @@
   max-width: 600px;
   margin: 0 auto;
 }
+
+.spectate {
+  margin: 20px;
+  font-size: 1.2em;
+}
+
+.spectate-link {
+  color: #000000;
+  text-decoration: underline;
+}

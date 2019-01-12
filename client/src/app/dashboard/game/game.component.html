@@ -6,4 +6,8 @@
     <app-chessboard stateSelector="game.board" [chessMoves]="gameService.chessMoves$"
       [sendMove]="makeMoveBound" [fen]="gameData && gameData.fen" [color]="gameData && gameData.color"></app-chessboard>
   </div>
+  <div class="spectate">
+    <span>Spectate: </span>
+    <a class="spectate-link" href="{{origin}}/spectate/{{gameData.id}}" target="_blank">{{origin}}/spectate/{{gameData.id}}</a>
+  </div>
 </div>

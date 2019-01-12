@@ -14,6 +14,7 @@ import { Game } from '../../models/Game';
 export class DashboardGameComponent implements OnInit {
   public gameData: Game;
   public makeMoveBound: Function;
+  public origin: string;
 
   constructor (
     private store: Store<AppState>,
@@ -32,5 +33,7 @@ export class DashboardGameComponent implements OnInit {
           this.makeMoveBound = this.gameService.makeMove.bind(this.gameService, gameId);
         }
       });
+
+    this.origin = window.location.origin;
   }
 }
