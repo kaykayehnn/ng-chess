@@ -152,7 +152,7 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
 
       const capturedPosition = toPosition(row, column);
       this.message = `${movingSide} captured en passant at ${move.to}`;
-      this.store.dispatch(new CapturePiece({ position: capturedPosition, color: move.color })); // FIXME:
+      this.store.dispatch(new CapturePiece({ position: capturedPosition, color: move.color }));
     } else if (move.flags === 'k' || move.flags === 'q') { // castling
       this.message = `${movingSide} castled ${move.flags} side`;
       this.store.dispatch(new CastleKing({ side: move.flags, color: move.color, zIndex: this.moveIx }));
@@ -191,7 +191,7 @@ export class ChessboardComponent implements OnInit, OnChanges, OnDestroy {
     const SPECIAL_MOVE = '#A569BD';
     const CHECKED_KING = '#EC7063';
     const checkedKing = this.chess.in_check() || this.chess.in_checkmate();
-    console.log(positions);
+
     const tiles: Tile[] = [];
 
     this.repeatForBoard((row, col) => {

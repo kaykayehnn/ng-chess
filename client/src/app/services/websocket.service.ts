@@ -62,7 +62,6 @@ export class WebsocketService {
     if (!environment.production) {
       setTimeout(() => window.location.reload(), 100);
     }
-    console.log('websocket closed');
   }
 
   private onMessage (message: MessageEvent) {

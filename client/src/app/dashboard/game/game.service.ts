@@ -28,7 +28,6 @@ export class GameService {
 
     this.websocketService.messages$.subscribe((message) => {
       if (message.resource === GAMES) {
-        console.log(message);
         if (message.payload.event === 'start') {
           this.token = message.payload.token;
           this.store.dispatch(new FetchGame(parseJwt<Game>(message.payload.token)));
