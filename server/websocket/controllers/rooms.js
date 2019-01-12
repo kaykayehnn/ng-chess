@@ -8,7 +8,7 @@ const JOIN_ROOM = 'join room'
 const joinRgx = /^join room:(.+):(\d+)$/
 const noop = () => 0
 
-module.exports = function roomController (config) {
+exports = module.exports = function roomController (config) {
   const { database, cache, jwtVerifier } = config
   const sendRoomsBound = sendRooms.bind(this)
   const redirectToGameBound = redirectToGame.bind(this)
@@ -119,3 +119,6 @@ module.exports = function roomController (config) {
     } else cb()
   }
 }
+
+// redis room key
+exports.ROOMS = ROOMS
