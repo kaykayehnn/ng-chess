@@ -6,7 +6,7 @@
 
 .transparent-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.8);
 }

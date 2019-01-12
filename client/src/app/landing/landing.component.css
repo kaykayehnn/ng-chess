@@ -20,13 +20,27 @@
 }
 
 .title {
-  font-size: 1.75em;
-  margin-bottom: 10px;
+  margin: 10% 0 5%;
+  font-size: 1.9em;
 }
 
 .title-sm {
-  font-size: 1.4em;
-  margin-bottom: 25px;
+  margin-bottom: 20%;
+  font-size: 1.5em;
+}
+
+.button {
+  font-size: 1.5em;
+  padding: 6px 12px;
+  border: 1px solid black;
+  border-radius: 1px;
+  cursor: pointer;
+  background: #FFFFFF;
+  transition: 0.5s all;
+}
+
+.button:hover {
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.35);
 }
 
 .chessboard {
@@ -36,25 +50,35 @@
   margin-left: auto;
 }
 
-.button {
-  font-size: 1.25em;
-  padding: 6px 12px;
-  border: 1px solid black;
-  border-radius: 1px;
-  cursor: pointer;
-  background: #FFFFFF;
-  transition: 0.5s all;
-  transform-origin: top center;
-  animation: swing 2.5s ease both 0s infinite;
+.reviews {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.6);
 }
 
-.button:hover {
-  box-shadow: 0 0 9px rgba(0, 0, 0, 0.35);
+.review {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Apple Chancery';
+  color: #FFFFFF;
 }
 
-.live-rooms {
-  cursor: pointer;
-  border: 1px solid black;
+.review-image {
+  max-height: 400px;
+  filter: grayscale(70%);
+}
+
+.review-block {
+  display: block;
+  margin: auto;
+}
+
+.review-text {
+  font-size: 2.2em;
+}
+
+.review-author {
+  font-size: 1.3em;
+  margin: 20px 0px 0px 25px;
 }
 
 @keyframes slide-out-top {
@@ -65,32 +89,5 @@
   100% {
     transform: translateY(-1000px);
     opacity: 0;
-  }
-}
-
-@keyframes swing {
-  /* first ~1.5s act as a delay on *each* iteration */
-  62% {
-    transform: rotate3d(0, 0, 1, 0deg);
-  }
-
-  70% {
-    transform: rotate3d(0, 0, 1, 3deg);
-  }
-
-  78% {
-    transform: rotate3d(0, 0, 1, -3deg);
-  }
-
-  86% {
-    transform: rotate3d(0, 0, 1, 3deg);
-  }
-
-  92% {
-    transform: rotate3d(0, 0, 1, -3deg);
-  }
-
-  100% {
-    transform: rotate3d(0, 0, 1, 0deg);
   }
 }

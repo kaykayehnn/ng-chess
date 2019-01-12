@@ -5,13 +5,21 @@
       <div class="title">Join Gary and Vishi</div>
       <div class="title-sm">Become the greatest Grandmaster ever</div>
       <span class="button" (click)="showModal = true">Sign In</span>
-      <h3></h3>
       <div *ngIf="showModal" class="modal">
         <app-authenticate (hide)="hideModal($event)"></app-authenticate>
       </div>
     </div>
     <div class="chessboard">
       <app-chessboard [chessMoves]="chessMoves$" color='' stateSelector="chessDemo" fen="" [disableCaptions]="true"></app-chessboard>
+    </div>
+  </div>
+  <div class="reviews">
+    <div class="review">
+      <img class="review-image" src="assets/Marlsen_Cagnus-2.jpg" alt="cagnus">
+      <div class="review-block">
+        <div class="review-text">Simply Astonishing</div>
+        <div class="review-author">- Cagnus Marlsen</div>
+      </div>
     </div>
   </div>
 </div>
