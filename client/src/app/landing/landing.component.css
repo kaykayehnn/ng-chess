@@ -20,12 +20,13 @@
 }
 
 .title {
-  margin: 40px 0 20px;
+  /* margin: 40px 0 20px; */
+    margin: 15% 0 5%;
   font-size: 1.9em;
 }
 
 .title-sm {
-  margin-bottom: 15%;
+  margin-bottom: 10%;
   font-size: 1.5em;
 }
 
@@ -36,6 +37,26 @@
 
   .title-sm {
     margin-bottom: 10%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .welcome {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .welcome {
+    font-size: 1.4em;
+  }
+
+  .title {
+    margin: 130px 0 45px;
+  }
+
+  .title-sm {
+    margin-bottom: 90px;
   }
 }
 
