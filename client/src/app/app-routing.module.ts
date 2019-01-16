@@ -43,14 +43,14 @@ const routes: Routes = [
       {
         path: 'spectate/:gameId',
         component: SpectateComponent
-      }
+      },
+      { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
     ]
   },
   {
     path: 'spectate/:gameId',
     component: SpectateComponent
   },
-  { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 

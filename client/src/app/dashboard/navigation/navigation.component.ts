@@ -20,18 +20,18 @@ export class DashboardNavigationComponent {
       title: 'Play',
       iconUrl: '/assets/vectors/gamepad-solid.svg'
     },
-    // {
-    //   path: './spectate',
-    //   title: 'Spectate',
-    //   iconUrl: '/assets/vectors/tv-solid.svg',
-    //   class: 'live'
-    // },
     {
       path: './admin',
       title: 'Admin',
       iconUrl: '/assets/vectors/toolbox-solid.svg',
       isAdmin: true
+    },
+    {
+      path: './logout',
+      title: 'Logout',
+      iconUrl: '/assets/vectors/sign-out-alt-solid.svg'
     }
   ];
+
   constructor (public authService: AuthService) { }
 }

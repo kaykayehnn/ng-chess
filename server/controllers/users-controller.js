@@ -48,7 +48,7 @@ exports.login = (req, res, next) => {
 
 exports.logout = (req, res, next) => {
   req.logout()
-    .then(sendToken(res))
+    .then(({ token }) => res.json({ token }))
     .catch(next)
 }
 

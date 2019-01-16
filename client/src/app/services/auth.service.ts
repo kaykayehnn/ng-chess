@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators/';
 
@@ -19,7 +20,8 @@ export class AuthService {
   constructor (
     private http: HttpClient,
     private store: Store<AppState>,
-    private storage: StorageService
+    private storage: StorageService,
+    private router: Router
   ) {
     this.store.select('user')
       .subscribe(state => {
