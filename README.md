@@ -1,3 +1,3 @@
 # Ng Chess
 
-This is the github pages branch of this repository.
+This is the GitHub Pages branch of this repository.
