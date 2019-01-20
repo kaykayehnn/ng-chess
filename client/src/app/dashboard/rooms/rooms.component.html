@@ -4,7 +4,7 @@
    <div *ngIf="!createdRoom" class="create-btn" [class.shaking]="rooms.length === 0" (click)="createRoom()">Create room</div>
   </div>
   <div *ngIf="rooms.length === 0 && renderCount >= 2" class="linux-mascot">
-    <div inlineSVG="/assets/vectors/linux-empty-opt2.svg"></div>
+    <div inlineSVG="assets/vectors/linux-empty-opt2.svg"></div>
   </div>
   <div *ngIf="rooms.length !== 0" class="flex">
     <div class="filter">
@@ -17,12 +17,12 @@
       <div *ngFor="let room of rooms" class="room-container">
         <div class="room"> <!-- ENHANCEMENT: apply special styling to own room -->
           <div>
-            <div class="avatar" [inlineSVG]="'/assets/vectors/animals/'+room.host.avatarUrl"></div>
+            <div class="avatar" [inlineSVG]="'assets/vectors/animals/'+room.host.avatarUrl"></div>
             <div class="host">{{room.host.email === this.user.email ? 'You' : room.host.email}}</div>
           </div>
           <!-- ENHANCEMENT: add %d seconds ago live timer with moment -->
           <div *ngIf="room.host.email !== this.user.email" class="join-btn">
-            <div class="join-img" inlineSVG="/assets/vectors/sign-in-alt-solid.svg" (click)="joinRoom(room)"></div>
+            <div class="join-img" inlineSVG="assets/vectors/sign-in-alt-solid.svg" (click)="joinRoom(room)"></div>
           </div>
         </div>
       </div>

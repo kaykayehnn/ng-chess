@@ -13,23 +13,23 @@ export class DashboardNavigationComponent {
     {
       path: './',
       title: 'Home',
-      iconUrl: '/assets/vectors/home-solid.svg'
+      iconUrl: 'assets/vectors/home-solid.svg'
     },
     {
       path: './rooms',
       title: 'Play',
-      iconUrl: '/assets/vectors/gamepad-solid.svg'
+      iconUrl: 'assets/vectors/gamepad-solid.svg'
     },
     {
       path: './admin',
       title: 'Admin',
-      iconUrl: '/assets/vectors/toolbox-solid.svg',
+      iconUrl: 'assets/vectors/toolbox-solid.svg',
       isAdmin: true
     },
     {
       path: './logout',
       title: 'Logout',
-      iconUrl: '/assets/vectors/sign-out-alt-solid.svg'
+      iconUrl: 'assets/vectors/sign-out-alt-solid.svg'
     }
   ];
 

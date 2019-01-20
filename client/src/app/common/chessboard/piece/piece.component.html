@@ -1,7 +1,7 @@
 <img class="piece"
   [class.picked]="isPicked"
   [class.captured]="captured"
-  [src]="'/assets/vectors/chess/'+pieceTypeMap[type]+'-'+pieceColorMap[color]+'.svg'"
+  [src]="'assets/vectors/chess/'+pieceTypeMap[type]+'-'+pieceColorMap[color]+'.svg'"
   [alt]="type"
   [style.top]="toCoordinates(position).row * 12.5 + 1 + '%'"
   [style.left]="toCoordinates(position).column * 12.5 + 1 + '%'"

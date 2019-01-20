@@ -34,6 +34,8 @@ export class DashboardGameComponent implements OnInit {
         }
       });
 
-    this.origin = window.location.origin;
+    // get rootPath
+    const href = window.location.href;
+    this.origin = href.slice(0, href.indexOf('/dashboard'));
   }
 }

@@ -2,7 +2,7 @@ export const serverPath = 'https://ng-chess.herokuapp.com';
 
 export function getWebsocketPath () {
   const path = serverPath
-    .replace(/^https?/, 'ws');
+    .replace(/^https?/, 'wss');
 
   return path;
 }
