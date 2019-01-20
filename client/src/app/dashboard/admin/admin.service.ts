@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { User } from '../../models/User';
 import { FetchUsers, FetchGames } from '../../store/actions/admin.actions';
 import { Game } from '../../models/Game';
+import { serverPath } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AdminService {
   ) { }
 
   fetchUsers (): Subscription {
-    const url = '/api/admin/users';
+    const url = `${serverPath}/api/admin/users`;
 
     return this.http.get<User[]>(url)
       .subscribe(users => {
@@ -26,7 +27,7 @@ export class AdminService {
   }
 
   fetchGames (): Subscription {
-    const url = '/api/admin/games';
+    const url = `${serverPath}/api/admin/games`;
 
     return this.http.get<Game[]>(url)
       .subscribe(games => {
@@ -35,14 +36,14 @@ export class AdminService {
   }
 
   editUser (userId: number, user: User) {
-    const url = `/api/admin/users/${userId}`;
+    const url = `${serverPath}/api/admin/users/${userId}`;
 
     return this.http.put(url, user)
       .subscribe(() => this.fetchGames());
   }
 
   deleteUser (userId: number) {
-    const url = `/api/admin/users/${userId}`;
+    const url = `${serverPath}/api/admin/users/${userId}`;
 
     return this.http.delete(url)
       .subscribe(() => {
@@ -52,7 +53,7 @@ export class AdminService {
   }
 
   deleteGame (gameId: number) {
-    const url = `/api/admin/games/${gameId}`;
+    const url = `${serverPath}/api/admin/games/${gameId}`;
 
     return this.http.delete(url)
       .subscribe(() => this.fetchGames());

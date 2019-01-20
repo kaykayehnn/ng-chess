@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { Game } from '../../models/Game';
 import { catchError } from 'rxjs/operators';
+import { serverPath } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class GameGuard implements CanActivate {
    * If user is logged in and game has finished redirects to dashboard
    */
   check (gameId: number): Observable<boolean> {
-    const url = `/api/games/${gameId}`;
+    const url = `${serverPath}/api/games/${gameId}`;
     return this.http.get(url)
       .pipe(catchError(err => of({})))
       .map((game: Game) => {

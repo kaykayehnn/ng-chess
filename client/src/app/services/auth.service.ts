@@ -9,6 +9,7 @@ import { StorageService } from './storage.service';
 import { User } from '../models/User';
 import { AppState } from '../store/app.state';
 import { SignIn, SignOut } from '../store/actions/user.actions';
+import { serverPath } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -56,13 +57,13 @@ export class AuthService {
   }
 
   getByEmail (email: string): Observable<User[]> {
-    const url = `/api/users?email=${email}`;
+    const url = `${serverPath}/api/users?email=${email}`;
 
     return this.http.get<User[]>(url);
   }
 
   logout (): Observable<any> {
-    const url = '/api/users/_logout';
+    const url = `${serverPath}/api/users/_logout`;
 
     return this.http.post(url, null)
       .pipe(
@@ -89,7 +90,7 @@ export class AuthService {
   }
 
   private authenticate (url: string, body: object): Observable<User> {
-    return this.http.post<User>(url, body)
+    return this.http.post<User>(`${serverPath}${url}`, body)
       .pipe(
         tap(user => {
           this.store.dispatch(new SignIn(user));

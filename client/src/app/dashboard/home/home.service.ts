@@ -8,6 +8,7 @@ import { Game } from '../../models/Game';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.state';
 import { FetchStats, FetchMatches } from '../../store/actions/dashboard.actions';
+import { serverPath } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class HomeService {
 
   fetchStats (): Subscription {
     const { id } = this.authService.getUser();
-    const url = `/api/users/${id}/stats`;
+    const url = `${serverPath}/api/users/${id}/stats`;
 
     return this.http.get<UserStats>(url)
       .subscribe(stats => {
@@ -30,7 +31,7 @@ export class HomeService {
 
   fetchLastMatches (n: number): Subscription {
     const { id } = this.authService.getUser();
-    const url = `/api/users/${id}/matches?n=${n}`;
+    const url = `${serverPath}/api/users/${id}/matches?n=${n}`;
 
     return this.http.get<Game[]>(url)
       .subscribe(matches => {
