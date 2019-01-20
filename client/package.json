@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "predeploy": "npm run build",
-    "deploy": "gh-pages --dist dist/ng-chess"
+    "deploy": "gh-pages --dist dist"
   },
   "private": true,
   "homepage": "https://kaykayehnn.github.io/ng-chess",

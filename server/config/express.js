@@ -12,7 +12,7 @@ module.exports = (app, database, cache) => {
   app.use(compression())
   app.use(express.json())
   app.use(morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev'))
-  app.use(express.static(path.join(__dirname, '../../client/dist/ng-chess/')))
+  app.use(express.static(path.join(__dirname, '../../client/dist')))
 
   app.use(decodeUser(cache))
   app.use(attachServices({ database, cache }))

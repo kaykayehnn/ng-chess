@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 
 const production = process.env.NODE_ENV === 'production'
-const indexPath = path.resolve(__dirname, '../../client/dist/ng-chess/index.html')
+const indexPath = path.resolve(__dirname, '../../client/dist/index.html')
 
 let cachedHtml
 let handler
