@@ -4,7 +4,9 @@
    <div *ngIf="!createdRoom" class="create-btn" [class.shaking]="rooms.length === 0" (click)="createRoom()">Create room</div>
   </div>
   <div *ngIf="rooms.length === 0 && renderCount >= 2" class="linux-mascot">
-    <div inlineSVG="assets/vectors/linux-empty-opt2.svg"></div>
+    <!-- only chrome displays svg well, falls back to object for other browsers -->
+    <div *ngIf="chrome" inlineSVG="assets/vectors/linux-empty-opt3.svg"></div>
+    <object *ngIf="!chrome" data="assets/vectors/linux-empty-opt3.svg"></object>
   </div>
   <div *ngIf="rooms.length !== 0" class="flex">
     <div class="filter">

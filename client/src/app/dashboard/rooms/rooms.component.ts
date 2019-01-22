@@ -20,6 +20,7 @@ export class DashboardRoomsComponent implements OnInit, OnDestroy {
   public createdRoom: boolean;
   public renderCount = 0; // used not to show empty state for a very short time
   // should wait until second render since first contains initial redux state
+  public chrome: boolean;
 
   constructor (
     private store: Store<AppState>,
@@ -34,6 +35,44 @@ export class DashboardRoomsComponent implements OnInit, OnDestroy {
       // ENHANCEMENT: add scale in/out animations
     });
     this.user = this.authService.getUser();
+
+    this.chrome = this.isChrome();
+  }
+
+  isChrome () {
+    // please note,
+    // that IE11 now returns undefined again for window.chrome
+    // and new Opera 30 outputs true for window.chrome
+    // but needs to check if window.opr is not undefined
+    // and new IE Edge outputs to true now for window.chrome
+    // and if not iOS Chrome check
+    // so use the below updated condition
+
+    const windowAny = window as any;
+
+    const isChromium = windowAny.chrome;
+    const winNav = window.navigator;
+    const vendorName = winNav.vendor;
+    const isOpera = typeof windowAny.opr !== 'undefined';
+    const isIEedge = winNav.userAgent.indexOf('Edge') > -1;
+    const isIOSChrome = winNav.userAgent.match('CriOS');
+
+    if (isIOSChrome) {
+      // is Google Chrome on IOS
+      return true;
+    } else if (
+      isChromium !== null &&
+      typeof isChromium !== 'undefined' &&
+      vendorName === 'Google Inc.' &&
+      isOpera === false &&
+      isIEedge === false
+    ) {
+      return true;
+      // is Google Chrome
+    } else {
+      return false;
+      // not Google Chrome
+    }
   }
 
   ngOnDestroy () {
