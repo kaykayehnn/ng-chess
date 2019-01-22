@@ -14,7 +14,7 @@ export class FormComponent implements OnInit {
   public readonly SIGN_IN = true;
   public readonly SIGN_UP = false;
 
-  public emailPattern = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'; // tslint:disable-line
+  public emailPattern = '(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'; // tslint:disable-line
   public passwordPattern = '^.{8,}$';
   private readonly validators: { [key: string]: Validators } = {
     email: [
