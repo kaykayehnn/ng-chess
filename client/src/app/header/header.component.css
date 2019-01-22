@@ -9,25 +9,17 @@
   text-align: center;
   /* transition: 0.2s transform; */
   /* border-bottom: 2px solid transparent; */
-}
-
-.logo:hover {
-  /* border-bottom: 2px solid black; */
-}
-
-.logo:active {
-  /* transform: scale(1.025); */
+  user-select: none;
 }
 
 .logo-image {
   width: auto;
   height: 66px;
   display: inline-block;
-  transform: translateY(10px);
+  transform: translateY(14px);
 }
 
 .title {
   font-size: 50px;
   margin-left: 10px;
-  user-select: none;
 }
