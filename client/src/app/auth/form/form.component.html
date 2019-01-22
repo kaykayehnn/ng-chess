@@ -9,7 +9,12 @@
       <input type="email" id="email" formControlName="email" placeholder="example@example.com">
     </div>
     <div class="input-group">
-      <label for="password">Password</label>
+      <label for="password">Password
+        <div *ngIf="signMode === SIGN_UP" class='tooltip'>
+          <img class='info-image' src='assets/vectors/information.svg'>️
+          <div class="tooltiptext">/{{passwordPattern}}/</div>
+        </div>
+      </label>
       <input type="password" id="password" formControlName="password" [class.invalid]="userForm.errors?.differentPasswords" placeholder="••••••••">
     </div>
     <div class="input-group" [class.invisible]="signMode !== SIGN_UP">

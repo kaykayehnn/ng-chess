@@ -13,14 +13,17 @@ import { Observable } from 'rxjs';
 export class FormComponent implements OnInit {
   public readonly SIGN_IN = true;
   public readonly SIGN_UP = false;
+
+  public emailPattern = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'; // tslint:disable-line
+  public passwordPattern = '^.{8,}$';
   private readonly validators: { [key: string]: Validators } = {
     email: [
       Validators.required,
-      Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+      Validators.pattern(new RegExp(this.emailPattern))
     ],
     password: [
       Validators.required,
-      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+      Validators.pattern(new RegExp(this.passwordPattern))
     ]
   };
 

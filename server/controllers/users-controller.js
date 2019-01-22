@@ -2,7 +2,7 @@ const User = require('../models/User')
 const Game = require('../models/Game')
 
 const emailRgx = /^[^@]{2,}@(?:\w{2,}\.)+\w{2,}$/
-const passwordRgx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+const passwordRgx = /^.{8,}$/
 
 exports.register = (req, res, next) => {
   let {
@@ -18,7 +18,7 @@ exports.register = (req, res, next) => {
     return next(new Error('Passwords don\'t match'))
   }
   if (!passwordRgx.test(password)) {
-    return next(new Error('Password must be at least 8 characters long and contain both a letter and a number'))
+    return next(new Error('Password must be at least 8 characters long'))
   }
 
   User.register(req.database)(email, password)
