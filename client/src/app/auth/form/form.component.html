@@ -23,7 +23,7 @@
       <input *ngIf="signMode === SIGN_IN"> <!-- placeholder, takes up screen space so button wouldnt bounce around -->
     </div>
     <div>
-      <input class="button" [class.active]="userForm.valid" type="submit" [value]="signMode === SIGN_IN ? 'Sign In' : 'Sign Up'" [disabled]="!userForm.valid">
+      <input class="button" [class.active]="userForm.valid || signMode === SIGN_IN" type="submit" [value]="signMode === SIGN_IN ? 'Sign In' : 'Sign Up'" [disabled]="!userForm.valid && signMode === SIGN_UP">
     </div>
   </form>
 </div>
