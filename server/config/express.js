@@ -8,7 +8,7 @@ const decodeUser = require('../middleware/decodeUser')
 const attachServices = require('../middleware/attachServices')
 
 module.exports = (app, database, cache) => {
-  app.use('/api', cors())
+  app.use('/api', cors({ origin: 'https://ng-chess.js.org' }))
   app.use(compression())
   app.use(express.json())
   app.use(morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev'))
