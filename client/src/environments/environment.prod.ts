@@ -1,4 +1,4 @@
-export const serverPath = 'https://ng-chess.herokuapp.com';
+export const serverPath = 'https://kaykayehnn.herokuapp.com/ng-chess';
 
 export function getWebsocketPath () {
   const path = serverPath

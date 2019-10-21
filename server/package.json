@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "node bootstrap.js",
-    "dev": "nodemo bootstrap.js"
+    "dev": "nodemon bootstrap.js"
   },
   "author": "Krasimir Nedelchev (https://github.com/kaykayehnn)",
   "license": "MIT",
