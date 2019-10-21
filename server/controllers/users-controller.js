@@ -32,7 +32,7 @@ exports.login = (req, res, next) => {
 
   User.login(req.database)(email, password)
     .then(user => {
-      req.user = user
+      req.user = JSON.parse(JSON.stringify(user))
       return req.logIn()
     })
     .then(sendToken(res))
