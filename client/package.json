@@ -2,7 +2,7 @@
   "name": "@ng-chess/client",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "yarn build",
+    "postinstall": "yarn build --base-href=/ng-chess/",
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.config.json",
     "build": "ng build --prod",

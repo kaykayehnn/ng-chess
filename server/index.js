@@ -1,4 +1,4 @@
-module.exports = function bootstrap() {
+module.exports = function bootstrap(server) {
   let env = process.env.NODE_ENV || 'development'
   if (env !== 'production') {
     const envPath = require('path').join(__dirname, '.env')
@@ -6,7 +6,7 @@ module.exports = function bootstrap() {
   }
 
   const app = require('express')()
-  const server = require('http').createServer(app)
+  server = server || require('http').createServer(app)
 
   const cache = require('./config/cache')()
   const database = require('./config/database')()
@@ -15,5 +15,5 @@ module.exports = function bootstrap() {
   require('./config/express')(app, database, cache)
   require('./config/routes')(app)
 
-  return server
+  return { app, server }
 }

@@ -1,4 +1,4 @@
-const app = require('./index.js')()
+const { server } = require('./index.js')()
 
 const port = process.env.PORT
-app.listen(port, () => console.log(`Server listening on port ${port}...`))
+server.listen(port, () => console.log(`Server listening on port ${port}...`))
