@@ -7,8 +7,27 @@
   display: flex;
 }
 
-.chart {
+.heading {
+  margin-bottom: 0.5em;
+  font-size: 1.5em;
+}
+
+.chart-container {
   flex: 0 0 50%;
-  /* justify-content: center; */
+  /* max-width: 50%; */
+  /* overflow: hidden; */
+}
+
+.chart-title {
   text-align: center;
+  user-select: none;
+}
+
+.chart {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.last-matches {
+  margin-left: 2em;
 }

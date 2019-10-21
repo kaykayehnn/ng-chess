@@ -1,6 +1,5 @@
 const controllers = require('../controllers/')
 const auth = require('./auth')
-const errorHandler = require('../middleware/errorHandler')
 
 module.exports = (app) => {
   const onlyAuthenticated = auth.enforceAuthStatus(true)
@@ -23,6 +22,4 @@ module.exports = (app) => {
   app.delete('/api/admin/games/:gameId', onlyAdmins, controllers.games.deleteById)
 
   app.get('/*', controllers.home.index)
-
-  app.use(errorHandler)
 }

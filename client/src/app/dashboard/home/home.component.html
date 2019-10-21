@@ -1,24 +1,35 @@
 <div *ngIf="state && state.stats">
   <div class="title">Dashboard</div>
-  <div *ngIf="state.stats.winCount === 0 && state.stats.lossCount === 0 && state.stats.unfinishedCount === 0">
-    No data
+  <div
+    *ngIf="
+      state.stats.winCount === 0 &&
+      state.stats.lossCount === 0 &&
+      state.stats.unfinishedCount === 0
+    "
+  >
+    You haven't played any games yet
   </div>
-  <div *ngIf="state.stats.winCount > 0 || state.stats.lossCount > 0 || state.stats.unfinishedCount > 0" class="flex">
-    <div class="wl-chart chart">
-      <div>Win/Loss Ratio</div>
-      <canvas id="wl-chart">
-      </canvas>
+  <div
+    *ngIf="
+      state.stats.winCount > 0 ||
+      state.stats.lossCount > 0 ||
+      state.stats.unfinishedCount > 0
+    "
+    class="flex"
+  >
+    <div class="wl-chart chart-container">
+      <div class="heading chart-title">Win/Loss Ratio</div>
+      <canvas id="wl-chart" class="chart"> </canvas>
     </div>
-    <div class="played-chart chart">
-      <div>Finished/Unfinished Games Ratio</div>
-      <canvas id="played-chart">
-      </canvas>
+    <div class="played-chart chart-container">
+      <div class="heading chart-title">Finished/Unfinished Games Ratio</div>
+      <canvas id="played-chart" class="chart"> </canvas>
     </div>
   </div>
-  <div *ngIf="state.lastMatches.length > 0">
+  <div *ngIf="state.lastMatches.length > 0" class="last-matches">
     <div class="heading">Last Matches</div>
     <div *ngFor="let match of state.lastMatches">
-      {{match.whitePlayerEmail}} vs. {{match.blackPlayerEmail}}
+      {{ match.whitePlayerEmail }} vs. {{ match.blackPlayerEmail }}
     </div>
   </div>
 </div>

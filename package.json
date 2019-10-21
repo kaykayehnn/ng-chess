@@ -1,21 +1,16 @@
 {
-  "name": "chess",
-  "version": "0.0.1",
+  "name": "@ng-chess/app",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "version": "1.0.0",
   "description": "Angular chess app",
-  "engines": {
-    "node": "8.11.3"
-  },
   "main": "index.js",
   "scripts": {
-    "start": "npm run server:start",
-    "install": "cd server && npm install && cd ../client && npm install",
-    "postinstall": "npm run client:build",
-    "server:start": "cd server && npm start",
-    "server:dev": "cd server && npm run dev",
-    "client:build": "cd client && npm run build",
-    "client:dev": "cd client && npm start"
+    "start": "cd server && yarn start"
   },
-  "keywords": [],
-  "author": "KN",
+  "author": "Krasimir Nedelchev (https://github.com/kaykayehnn)",
   "license": "MIT"
 }
